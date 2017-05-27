@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<svg width="290.75" height="130.35" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <radialGradient id="gradient0" gradientTransform="matrix(0.24945068359375 0 0 0.24945068359375 0 -44)" spreadMethod="pad" cy="0" cx="0" r="819.2" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#ffffff" offset="0"/>
+   <stop offset="1"/>
+  </radialGradient>
+  <radialGradient id="gradient1" gradientTransform="matrix(0.1798095703125 0 0 0.1798095703125 0 -29.25)" spreadMethod="pad" cy="0" cx="0" r="819.2" gradientUnits="userSpaceOnUse">
+   <stop offset="0"/>
+   <stop stop-color="#ffffff" offset="1"/>
+  </radialGradient>
+  <radialGradient id="gradient2" gradientTransform="matrix(0.0275726318359375 0 0 0.0275726318359375 4.8 -8)" spreadMethod="pad" cy="0" cx="0" r="819.2" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#ffffff" offset="0"/>
+   <stop offset="1"/>
+  </radialGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="132.35" width="292.75" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <path id="svg_2" d="m266.599976,10.766666q19.650024,1.450002 19.650024,3.200002q0,2.549998 -41.250015,4.349998q-41.300003,1.850002 -99.600006,1.900002l-3.699997,0q-56,-0.100002 -95.950005,-1.900002q-41.249992,-1.799999 -41.249992,-4.349998q0,-1.75 19.649994,-3.200002l21.599998,-1.2q41.25,-1.849999 99.650002,-1.8q58.300003,-0.049999 99.600006,1.8l21.599991,1.2" fill="url(#gradient0)"/>
+   <path id="svg_3" d="m145.399979,22.266666l0,43.999996" stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#666666" fill="none"/>
+   <path id="svg_4" d="m266.599976,10.766666q19.650024,1.450002 19.650024,3.200002q0,2.549998 -41.250015,4.349998q-41.300003,1.850002 -99.600006,1.900002l-3.699997,0q-56,-0.100002 -95.950005,-1.900002q-41.249992,-1.799999 -41.249992,-4.349998q0,-1.75 19.649994,-3.200002l21.599998,-1.2q41.25,-1.849999 99.650002,-1.8q58.300003,-0.049999 99.600006,1.8l21.599991,1.2" stroke-linejoin="round" stroke-linecap="round" stroke="url(#gradient1)" fill="none"/>
+   <path id="svg_5" d="m161.149979,65.216667q0,-6.600002 -4.649994,-11.25q-4.650009,-4.650002 -11.25,-4.650002q-6.600006,0 -11.25,4.650002q-4.649994,4.649998 -4.649994,11.25q0,6.600006 4.649994,11.25q4.649994,4.650002 11.25,4.650002q6.599991,0 11.25,-4.650002q4.649994,-4.649994 4.649994,-11.25m11.350006,-26.100002q11.249985,11.25 11.249985,27.149998q0,15.900009 -11.249985,27.100006q-11.200012,11.25 -27.100006,11.25q-15.899994,0 -27.150002,-11.25q-11.199997,-11.199997 -11.199997,-27.100006q0,-15.899998 11.199997,-27.149998q11.250008,-11.199997 27.150002,-11.199997q15.899994,0 27.100006,11.199997" fill-opacity="0.2" fill="#3399ff"/>
+   <path id="svg_6" d="m161.149979,65.216667q0,6.600006 -4.649994,11.25q-4.650009,4.650002 -11.25,4.650002q-6.600006,0 -11.25,-4.650002q-4.649994,-4.649994 -4.649994,-11.25q0,-6.600002 4.649994,-11.25q4.649994,-4.650002 11.25,-4.650002q6.599991,0 11.25,4.650002q4.649994,4.649998 4.649994,11.25" fill="url(#gradient2)"/>
+   <path id="svg_7" d="m161.149979,65.216667q0,6.600006 -4.649994,11.25q-4.650009,4.650002 -11.25,4.650002q-6.600006,0 -11.25,-4.650002q-4.649994,-4.649994 -4.649994,-11.25q0,-6.600002 4.649994,-11.25q4.649994,-4.650002 11.25,-4.650002q6.599991,0 11.25,4.650002q4.649994,4.649998 4.649994,11.25m11.350006,-26.100002q11.249985,11.25 11.249985,27.149998q0,15.900009 -11.249985,27.100006q-11.200012,11.25 -27.100006,11.25q-15.899994,0 -27.150002,-11.25q-11.199997,-11.199997 -11.199997,-27.100006q0,-15.899998 11.199997,-27.149998q11.250008,-11.199997 27.150002,-11.199997q15.899994,0 27.100006,11.199997" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.05" stroke="#666666" fill="none"/>
+  </g>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_13" y2="736.174988" x2="1261.875" y1="772.174988" x1="1209.875" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_14" y2="724.174988" x2="1293.875" y1="771.174988" x1="1210.875" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_15" y2="727.174988" x2="1214.875" y1="724.174988" x1="1293.875" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_17" y2="867.799583" x2="1527.582657" y1="731.799583" x1="1231.582657" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_18" y2="732.799583" x2="1230.582657" y1="861.799583" x1="1522.582657" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_19" y2="731.799583" x2="1522.582657" y1="862.799583" x1="1230.582657" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+  <line stroke-linecap="round" stroke-linejoin="round" id="svg_20" y2="849.174988" x2="1097.875" y1="806.174988" x1="1064.875" fill-opacity="null" stroke-opacity="null" stroke="#666666" fill="none"/>
+ </g>
+</svg>

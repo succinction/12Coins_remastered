@@ -1,0 +1,25 @@
+<svg width="475.7px" height="266.35px" viewBox="0 0 475.7 266.35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <radialGradient gradientUnits="userSpaceOnUse" r="819.2" cx="0" cy="0" spreadMethod="pad" gradientTransform="matrix(0.12982177734375 0 0 0.12982177734375 234.65 159.3)" id="gradient0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" r="819.2" cx="0" cy="0" spreadMethod="pad" gradientTransform="matrix(0.12982177734375 0 0 0.122650146484375 234.4 112.1)" id="gradient1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" r="819.2" cx="0" cy="0" spreadMethod="pad" gradientTransform="matrix(0.019775390625 0 0 0.019775390625 234.15 226.95)" id="gradient2">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1"/>
+    </radialGradient>
+  </defs>
+  <g>
+    <path stroke="none" fill="url(#gradient0)" d="M234.3 212.5 L229.7 212.5 229.7 212.45 234.3 11.7 239.15 212.45 239.15 212.5 234.3 212.5"/>
+    <path fill="none" stroke="#666666" stroke-width="0.05" stroke-linecap="round" stroke-linejoin="round" d="M234.3 11.7 L234.3 0 M234.3 212.5 L234.3 257.1 M234.3 257.6 L234.3 257.1"/>
+    <path fill="none" stroke="#666666" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M234.3 257.1 L468.7 257.1 M234.3 257.1 L0 257.1"/>
+    <path fill="none" stroke="url(#gradient1)" stroke-width="0.05" stroke-linecap="round" stroke-linejoin="round" d="M229.7 212.45 L234.3 11.7 239.15 212.45"/>
+    <path stroke="none" fill="#3399ff" fill-opacity="0.2" d="M261.4 200.85 Q272.65 212.1 272.65 228 272.65 243.9 261.4 255.1 250.2 266.35 234.3 266.35 218.4 266.35 207.15 255.1 195.95 243.9 195.95 228 195.95 212.1 207.15 200.85 218.4 189.65 234.3 189.65 250.2 189.65 261.4 200.85 M250.05 226.95 Q250.05 220.35 245.4 215.7 240.75 211.05 234.15 211.05 227.55 211.05 222.9 215.7 218.25 220.35 218.25 226.95 218.25 233.55 222.9 238.2 227.55 242.85 234.15 242.85 240.75 242.85 245.4 238.2 250.05 233.55 250.05 226.95"/>
+    <path stroke="none" fill="url(#gradient2)" d="M250.05 226.95 Q250.05 233.55 245.4 238.2 240.75 242.85 234.15 242.85 227.55 242.85 222.9 238.2 218.25 233.55 218.25 226.95 218.25 220.35 222.9 215.7 227.55 211.05 234.15 211.05 240.75 211.05 245.4 215.7 250.05 220.35 250.05 226.95"/>
+    <path fill="none" stroke="#666666" stroke-width="0.05" stroke-linecap="round" stroke-linejoin="round" d="M261.4 200.85 Q272.65 212.1 272.65 228 272.65 243.9 261.4 255.1 250.2 266.35 234.3 266.35 218.4 266.35 207.15 255.1 195.95 243.9 195.95 228 195.95 212.1 207.15 200.85 218.4 189.65 234.3 189.65 250.2 189.65 261.4 200.85 M250.05 226.95 Q250.05 233.55 245.4 238.2 240.75 242.85 234.15 242.85 227.55 242.85 222.9 238.2 218.25 233.55 218.25 226.95 218.25 220.35 222.9 215.7 227.55 211.05 234.15 211.05 240.75 211.05 245.4 215.7 250.05 220.35 250.05 226.95"/>
+  </g>
+</svg>
