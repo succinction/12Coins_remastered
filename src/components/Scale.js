@@ -8,12 +8,6 @@ import {TweenLite, Elastic}  from "gsap";
 
 class Scale extends Component {
 
-
-
-
-
-
-
     tip_scale = (zero) => {
         // console.log('tip_scale probs.balanced: ',  this.props.balanced)
         let bal = (zero === 0) ? zero : this.props.balanced;
@@ -23,51 +17,35 @@ class Scale extends Component {
         TweenLite.to("#spinner", 2.5, {rotation: bal * -4, ease: Elastic.easeOut});
     };
 
-
-
-
-    componentDidMount() {
-        //this.change_coin_images ()
-
-    }
+    // componentDidMount() {
+    //     //this.change_coin_images ()
+    //
+    // }
 
     componentDidUpdate(prevProps, prevState) {
         // invoked immediately after updating occurs
         // console.log('componentDidUpdate < Scale ')
         this.tip_scale()
     }
-
-    componentWillMount() {
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        //immediately before rendering when new props or state are being received
-
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    componentWillUnmount() {
-
-    }
+    //
+    // componentWillMount() {
+    // }
+    //
+    // componentWillUpdate(nextProps, nextState) {
+    //     //immediately before rendering when new props or state are being received
+    // }
+    //
+    // componentWillReceiveProps(nextProps) {
+    // }
+    //
+    // componentWillUnmount() {
+    // }
 
     // shouldComponentUpdate(nextProps, nextState) {
     //
     //     return this.props.balanced !== nextProps.balanced;
     //
     // }
-
-
-
-
-
-
-
-
 
 
 
