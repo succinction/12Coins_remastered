@@ -165,13 +165,43 @@ class Coins extends Component {
     }
 
 
+    /////////
+
+
+//
+//     var myDraggable = Draggable.create("#box1", {
+//   bounds:"#container"
+// })[0];
+//
+// myDraggable.addEventListener("press", onPress);
+//
+//
+//
+// function onPress() {
+//   console.log("myDraggable was pressed");
+//   TweenLite.to(this, 0.2, {backgroundColor:"red"}); // animate the backgroundColor of the target of the Draggable that was pressed
+// }
+
+    ///////////
+
+    //
+    // onPress() {
+    //     console.log("myDraggable was pressed", this);
+    //         // TweenLite.to(this, 0.2, {backgroundColor: "red"}); // animate the backgroundColor of the target of the Draggable that was pressed
+    // }
     draggabate() {
+
         for (let i = this.props.numberOfCoins - 1; i >= 0; i--) {
             const this_coin = "#coin" + i;
-            Draggable.create(this_coin, {
+            let this_drag = Draggable.create(this_coin, {
                 zIndexBoost: true,
                 onDragEnd: this.props.balance_func
+
             });
+
+            // this_drag.addEventListener("press", this.onPress);
+
+
         }
         Draggable.create("#feather", {
             zIndexBoost: true,
