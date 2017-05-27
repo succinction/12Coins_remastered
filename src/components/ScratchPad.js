@@ -12,16 +12,17 @@ class ScratchPad extends Component {
 
 
 
-            <h2>Welcome to the 12 coins simulator.</h2>
+            <h2>Discover the False Coin in <stroing>3</stroing> Measurements</h2>
 
             <h3>How to play:</h3>
+            Drag the coins onto the scale. <br />
             One random Coin will be False (randomly Light or Heavy)
             <ul>
                 <li>Good Coins = Good Coins</li>
                 <li>Feather = False Light Coin</li>
                 <li>Ankh = False Heavy Coin</li>
             </ul>
-                To Win, balance against the Ankh to verify the heavy coin, or the Feather to verify the light coin.<br />
+                To Win, you will need to discover which coin is false, and if it is light or heavy, and then you will balance against the Ankh to verify the heavy coin, or the Feather to verify the light coin.<br />
             Measurements are counted by putting the same number of coins on each side of the scale. <br />
             Since measurements are counted when the items on each side of the scale are even, add or subtract coins from only one side at a time to avoid accidental measurement counts.
 
