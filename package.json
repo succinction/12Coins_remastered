@@ -2,6 +2,7 @@
   "name": "coin_transform",
   "version": "0.1.0",
   "private": true,
+    "homepage": "http://succinct.x10.mx/new12",
   "devDependencies": {
     "react-scripts": "1.0.6"
   },
