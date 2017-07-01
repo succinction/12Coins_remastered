@@ -10,13 +10,7 @@ import Scale from './components/Scale'
 import Timer   from './components/Timer';
 import {TweenMax, Power3}  from "gsap";
 
-
-
-
-
-
 class App extends Component {
-
     constructor(props) {
         super(props);
         this.gameNumber = 1;
@@ -35,31 +29,22 @@ class App extends Component {
             numberOfCoins: this.numberOfCoins,
             balanced: 0
         };
-
         document.onselectstart = function () {
             return false;
         };
         document.body.setAttribute('unselectable', 'on', 0);
-
         this.userName = "guest"
-
-
         this.renew_game_object = () => {
-
-
-
             let sign = (this.light_or_heavy > 1) ? "+" : "-";
             return {
-            userName: this.userName,
-            gameNumber: this.gameNumber,
-            gameType: this.numberOfCoins,
-            falseCoin: this.lucky_number + sign,
-            finalScore: "undetermined",
-            measurements: []
-        }
+                userName: this.userName,
+                gameNumber: this.gameNumber,
+                gameType: this.numberOfCoins,
+                falseCoin: this.lucky_number + sign,
+                finalScore: "undetermined",
+                measurements: []
+            }
         };
-
-
         this.reset_location_array = (num) => {
             let numb = (num > 0) ? num : this.state.numberOfCoins;
             let arr = [0, 0];
@@ -68,30 +53,17 @@ class App extends Component {
             }
             return arr
         };
-
-
-
-
-
         this.coin_location_array = this.reset_location_array();
         this.coin_locations = this.coin_location_array.toString();
         // COLOR WARP
         this.colr = {h: 0, s: 50, l: 100};
         this.element = document.getElementsByTagName("body")[0];
         // /COLOR WARP
-
-
 //////////////////////////////////////////////////////////////////////////////////////
-
         // init_gameObject
         // this.gameObject = {}
-
-
         this.gameObject = this.renew_game_object();
-
 //////////////////////////////////////////////////////////////////////////////////////
-
-
     }
 
     // COLOR WARP
@@ -102,17 +74,10 @@ class App extends Component {
         TweenMax.to(this.colr, 20, {h: 0, l: 100, onUpdate: this.applyColor});
     };
     // /COLOR WARP
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////
     updateGameObject = () => {
-
         // let sign = (this.light_or_heavy > 1) ? "+" : "-";
         // this.userName = "guest"
-
         // init_gameObject
         // this.gameObject = {
         //     userName: this.userName,
@@ -120,39 +85,26 @@ class App extends Component {
         //     gameType: this.state.numberOfCoins,
         //     falseCoin: this.lucky_number + sign
         // }
-
-
         //
         let measuretime = this._child_timer.get_time();
-        let ankh_xy = [parseInt( document.getElementById("ankh")._gsTransform.x, 10 ) , parseInt(  document.getElementById("ankh")._gsTransform.y, 10)]  ;
-        let feather_xy = [parseInt( document.getElementById("feather")._gsTransform.x, 10 ) , parseInt(  document.getElementById("feather")._gsTransform.y, 10)] ;
+        let ankh_xy = [parseInt(document.getElementById("ankh")._gsTransform.x, 10), parseInt(document.getElementById("ankh")._gsTransform.y, 10)];
+        let feather_xy = [parseInt(document.getElementById("feather")._gsTransform.x, 10), parseInt(document.getElementById("feather")._gsTransform.y, 10)];
 //        let measures = [ankh_xy, feather_xy];
-
-
-        let push_position = { "time": measuretime, "ankh": ankh_xy, "feather": feather_xy };
-
-
+        let push_position = {"time": measuretime, "ankh": ankh_xy, "feather": feather_xy};
         for (let i = this.state.numberOfCoins - 1; i >= 0; i--) {
             const this_coin = document.getElementById("coin" + i);
-            const coin_xy = [ parseInt(  this_coin._gsTransform.x, 10 ) , parseInt( this_coin._gsTransform.y, 10)];
+            const coin_xy = [parseInt(this_coin._gsTransform.x, 10), parseInt(this_coin._gsTransform.y, 10)];
             // push_position.push(coin_xy);
             // Object.assign(push_position, )
             push_position["coin" + i] = coin_xy;
         }
-
         // Object.assign(this.gameObject.measurements, push_position)
-         this.gameObject.measurements.push(push_position)
+        this.gameObject.measurements.push(push_position)
         console.log(this.gameObject)
         // console.log(this.gameObject.toString())
-        console.log(JSON.stringify(this.gameObject)   )
+        console.log(JSON.stringify(this.gameObject))
     };
 //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
     reset_game = (numbr) => {
         let lucky_number_init = -1;
         this._child_timer.reset_time();
@@ -216,12 +168,7 @@ class App extends Component {
             measurement_constituted += this.coin_location_array[i];
         }
         if (measurement_constituted === 0) {
-
             /////
-
-
-
-
             // show lucky
             for (let i = 0; i < this.coin_location_array.length; i++) {
                 if (i === this.lucky_number) {
@@ -258,11 +205,7 @@ class App extends Component {
         let coin_locations_now = this.coin_location_array.toString();
         //
         if (measurement_constituted === 0 && coins_on_scale_now > 0 && this.coin_locations !== coin_locations_now) {
-
-
-        this.updateGameObject();
-
-
+            this.updateGameObject();
             if ((Math.abs(this.coin_location_array[number_of_coins]) === 1 || Math.abs(this.coin_location_array[number_of_coins + 1]) === 1) && coins_on_scale_now === 2) {
                 if (this.state.balanced === 0) {
                     if (this.measurementsUsed < 3) {
@@ -292,39 +235,28 @@ class App extends Component {
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
                         if (this.measurementsUsed === 4) {
-
                         }
                     }
                 } else {
                     this.measurementsUsed++;
                     this.readout = 'Oops. Wrong. ' + this.measurementsUsed + ' of 3 measurements used. ' + time;
-
                     TweenMax.to("#scale_icon" + (this.measurementsUsed - 1), .5, {
                         autoAlpha: 0.2,
                         ease: Power3.easeOut
                     });
-
-
                 }
             } else {
                 this.measurementsUsed++;
                 this.readout = this.measurementsUsed + ' of 3 measurements used.';
-
                 TweenMax.to("#scale_icon" + (this.measurementsUsed - 1), .5, {autoAlpha: 0.2, ease: Power3.easeOut});
-
             }
         }
         this.coin_locations = coin_locations_now;
-
-
         // this.updateGameObject();
-
         this.setState({
             msg: this.readout
         })
     };
-
-
 /////////////////////////// BUTTONS //////////////////////////////////////////
     show_cheat = () => {
         //console.log("Cheating")
@@ -332,8 +264,6 @@ class App extends Component {
         TweenMax.to(lucky_label, .4, {y: "-=30"})
         TweenMax.to(["#messenger", "#cheat_btn"], 2, {color: "hsl(0, 80%, 60%)"})
     };
-
-
     coins_3 = () => {
         this.setState({
             numberOfCoins: 3
@@ -370,51 +300,35 @@ class App extends Component {
         });
         this.reset_game(12)
     };
-
     toggle_labels = () => {
         this.setState({
             labels: !this.state.labels
         });
         // console.log('labels: !this.state.labels : ', this.state.labels)
-
     };
-
-
 ///////////////////////////////////////////////////////////////////////////////
     render() {
-
         let TRUE = true;
         return (
             <div className="App" id="app_id">
-
                 {TRUE && <Bg />}
                 {TRUE && <Scale balanced={this.state.balanced}/>}
-
                 {TRUE && <Timer ref={(child) => {
                     this._child_timer = child;
                 }}/>}
-
                 {TRUE && <Instructions version={this.version}/>}
                 {TRUE && <Message msg={this.state.msg} className="messenger" id="messenger"/>}
-
-
                 <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
                      coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
                      coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
                      replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
                      label_fn={this.toggle_labels}/>
-
                 <Coins ref={(child) => {
                     this._child = child;
                 }} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game}/>
-
-
                 {TRUE && <ScratchPad version={this.version}/> }
-
-
             </div>
-
         );
     }
 }
