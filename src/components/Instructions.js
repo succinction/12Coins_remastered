@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
 class Instructions extends Component {
-
     render() {
         return (
-
         <div className="footer" id="instruct">
             <p>
                 Measurements are counted by putting the same number of coins on each side of the scale. <br />

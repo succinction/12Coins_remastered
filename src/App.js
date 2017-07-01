@@ -11,6 +11,10 @@ import Timer   from './components/Timer';
 import {TweenMax, Power3}  from "gsap";
 
 
+
+
+
+
 class App extends Component {
 
     constructor(props) {
