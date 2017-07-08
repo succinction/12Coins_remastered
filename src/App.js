@@ -9,8 +9,7 @@ import ScratchPad   from './components/ScratchPad';
 import Scale from './components/Scale'
 import Timer   from './components/Timer';
 import {TweenMax, Power3}  from 'gsap';
-import 'whatwg-fetch'
-//import 'axios'
+// import 'whatwg-fetch'
 import axios from 'axios';
 // import fetch from fetch;
 
@@ -115,7 +114,7 @@ class App extends Component {
 
 
     saveGameObject = (finalScore) => {
-        // const fetch = require('whatwg-fetch')
+
 
 
         console.log('saveGameObject = (finalScore) => ' + finalScore)
@@ -124,11 +123,11 @@ class App extends Component {
         this.gameObject.finalScore = finalScore;
 
 
-        console.log(JSON.stringify(this.gameObject));
-        console.log();
-        console.log(this.gameObject);
+        // console.log(JSON.stringify(this.gameObject));
+        // console.log();
+        // console.log(this.gameObject);
 
-        let myJSONobject = JSON.stringify(this.gameObject);
+        // let myJSONobject = JSON.stringify(this.gameObject);
 
 
         axios({
