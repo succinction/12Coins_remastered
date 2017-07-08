@@ -8,7 +8,9 @@ import Message from './components/Message'
 import ScratchPad   from './components/ScratchPad';
 import Scale from './components/Scale'
 import Timer   from './components/Timer';
-import {TweenMax, Power3}  from "gsap";
+import {TweenMax, Power3}  from 'gsap';
+import 'whatwg-fetch'
+// import fetch from fetch;
 
 class App extends Component {
     constructor(props) {
@@ -90,20 +92,61 @@ class App extends Component {
         let ankh_xy = [parseInt(document.getElementById("ankh")._gsTransform.x, 10), parseInt(document.getElementById("ankh")._gsTransform.y, 10)];
         let feather_xy = [parseInt(document.getElementById("feather")._gsTransform.x, 10), parseInt(document.getElementById("feather")._gsTransform.y, 10)];
 //        let measures = [ankh_xy, feather_xy];
-        let push_position = {"time": measuretime, "ankh": ankh_xy, "feather": feather_xy};
+        let push_position = {'time': measuretime, 'ankh': ankh_xy, 'feather': feather_xy};
         for (let i = this.state.numberOfCoins - 1; i >= 0; i--) {
-            const this_coin = document.getElementById("coin" + i);
+            const this_coin = document.getElementById('coin' + i);
             const coin_xy = [parseInt(this_coin._gsTransform.x, 10), parseInt(this_coin._gsTransform.y, 10)];
             // push_position.push(coin_xy);
             // Object.assign(push_position, )
-            push_position["coin" + i] = coin_xy;
+            push_position['coin' + i] = coin_xy;
         }
         // Object.assign(this.gameObject.measurements, push_position)
+        this.gameObject.finalScore = this.measurementsUsed + '/3=' + measuretime
         this.gameObject.measurements.push(push_position)
         console.log(this.gameObject)
+        console.log("")
         // console.log(this.gameObject.toString())
         console.log(JSON.stringify(this.gameObject))
     };
+//////////////////////////////////////////////////////////////////////////////////////
+    //  SAVE GAMEOBJECT
+
+
+
+    saveGameObject = (finalScore) => {
+        // const fetch = require('whatwg-fetch')
+
+
+        console.log('saveGameObject = (finalScore) => ' + finalScore)
+
+
+        this.gameObject.finalScore = finalScore;
+
+        //  AJAX CALL TO SAVE
+
+        fetch('http://127.0.0.1:8000/api/savegame/', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.gameObject)
+        })
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
         let lucky_number_init = -1;
@@ -205,10 +248,12 @@ class App extends Component {
         let coin_locations_now = this.coin_location_array.toString();
         //
         if (measurement_constituted === 0 && coins_on_scale_now > 0 && this.coin_locations !== coin_locations_now) {
+            // SCALE BALANCED, SO UPDATE GAMEOBJECT
             this.updateGameObject();
             if ((Math.abs(this.coin_location_array[number_of_coins]) === 1 || Math.abs(this.coin_location_array[number_of_coins + 1]) === 1) && coins_on_scale_now === 2) {
                 if (this.state.balanced === 0) {
                     if (this.measurementsUsed < 3) {
+                        // WIN
                         // COLOR WARP
                         TweenMax.to(this.colr, 15, {
                             h: -360,
@@ -220,7 +265,18 @@ class App extends Component {
                         });
                         // /COLOR WARP
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
+
+                        // SAVE GAME PROCEDURE
+
+                        // IF USER IS ANONYMOUS
+                        // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
+                        // SAVE VIA AJAX CALL
+                        // //
+                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3=' + time)
+
+
                     } else if (this.measurementsUsed < 4) {
+                        // WIN
                         // COLOR WARP
                         TweenMax.to(this.colr, 20, {
                             h: 360,
@@ -232,6 +288,11 @@ class App extends Component {
                         });
                         // /COLOR WARP
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
+
+                        // SAVE GAME
+                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3=' + time)
+
+
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
                         if (this.measurementsUsed === 4) {
@@ -327,6 +388,7 @@ class App extends Component {
                     this._child = child;
                 }} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game}/>
+
                 {TRUE && <ScratchPad version={this.version}/> }
             </div>
         );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Controls from "./Controls";
 
 class Instructions extends Component {
     render() {
@@ -9,6 +10,9 @@ class Instructions extends Component {
                 To Win, balance against the Ankh to verify the heavy coin, or the Feather to verify the light coin. <br />
                 <span className="copyright">Copyright 2006-2017   Joseph Howard   | <a href="mailto:succinction@gmail.com" >succinction@gmail.com</a>   |   {this.props.version}   |    built in react with gsap</span> 
             </p>
+
+
+                <Controls />
         </div>
         );
     }

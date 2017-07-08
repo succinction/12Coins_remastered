@@ -2,13 +2,15 @@
   "name": "coin_transform",
   "version": "0.1.0",
   "private": true,
-    "homepage": "http://succinct.x10.mx/new12",
+  "homepage": ".",
   "devDependencies": {
     "react-scripts": "1.0.6"
   },
   "dependencies": {
+    "gsap": "^1.20.2",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

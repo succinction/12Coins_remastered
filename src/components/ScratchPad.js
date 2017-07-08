@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
+import LeaderBoard from "./LeaderBoard";
 
 class ScratchPad extends Component {
     render() {
         return (
             <div className="scratch">
-                <h2>Discover the False Coin in
-                    <stroing>3</stroing>
-                    Measurements
+
+                <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements
                 </h2>
+
+                <LeaderBoard />
+
                 <h3>How to play:</h3>
                 Drag the coins onto the scale. <br />
-                One random Coin will be False (randomly Light or Heavy)
+                To win, balance the false coin against the Ank or Feather after measuring only 3 times <br />
+                Balance against the Ankh if the false coin is Heavy<br />
+                Balance against the Feather if the false coin is Light<br />
+
+                One random Coin will be False (randomly Light or Heavy)<br />
+
                 <ul>
                     <li>Good Coins = Good Coins</li>
                     <li>Feather = False Light Coin</li>
