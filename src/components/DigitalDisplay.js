@@ -22,21 +22,21 @@ class Digital_display extends Component {
     // }
     render() {
         // SECONDS ELAPSED
-        let sec = this.props.seconds
-        let minsx = Math.floor(sec / 600)
-        let mins = Math.floor(sec / 60)
-        let secs = Math.floor(sec % 60 / 10)
-        let secs0 = (sec % 10)
+        let sec = this.props.seconds;
+        let minsx = Math.floor(sec / 600);
+        let mins = Math.floor(sec / 60);
+        let secs = Math.floor(sec % 60 / 10);
+        let secs0 = (sec % 10);
         return (
             <div>
                 <div>
                     {false && this.digit_images.map((image, i) => <div id={"digit_" + i}><img src={image} alt=""/>
                     </div>)}
-                    {true && <span id="digit_0"><img src={this.digit_images[minsx]} alt=""/></span> }
-                    {true && <span id="digit_1"><img src={this.digit_images[mins]} alt=""/></span> }
-                    <span  ></span>
-                    {true && <span id="digit_2"><img src={this.digit_images[secs]} alt=""/></span> }
-                    {true && <span id="digit_3"><img src={this.digit_images[secs0]} alt=""/></span> }
+                    {<span id="digit_0"><img src={this.digit_images[minsx]} alt=""/></span> }
+                    {<span id="digit_1"><img src={this.digit_images[mins]} alt=""/></span> }
+                    <span  />
+                    {<span id="digit_2"><img src={this.digit_images[secs]} alt=""/></span> }
+                    {<span id="digit_3"><img src={this.digit_images[secs0]} alt=""/></span> }
                 </div>
             </div>
         );

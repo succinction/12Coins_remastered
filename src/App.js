@@ -10,6 +10,8 @@ import Scale from './components/Scale'
 import Timer   from './components/Timer';
 import {TweenMax, Power3}  from 'gsap';
 import 'whatwg-fetch'
+//import 'axios'
+import axios from 'axios';
 // import fetch from fetch;
 
 class App extends Component {
@@ -112,7 +114,6 @@ class App extends Component {
     //  SAVE GAMEOBJECT
 
 
-
     saveGameObject = (finalScore) => {
         // const fetch = require('whatwg-fetch')
 
@@ -122,29 +123,46 @@ class App extends Component {
 
         this.gameObject.finalScore = finalScore;
 
-        //  AJAX CALL TO SAVE
 
-        fetch('http://127.0.0.1:8000/api/savegame/', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.gameObject)
-        })
+        console.log(JSON.stringify(this.gameObject));
+        console.log();
+        console.log(this.gameObject);
+
+        let myJSONobject = JSON.stringify(this.gameObject);
+
+
+        axios({
+            method: 'post',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: 'http://127.0.0.1:8000/api/savegame/',
+            // data: this.gameObject
+            data: this.gameObject
+        });
+
+
+        // axios.post('http://127.0.0.1:8000/api/savegame/', myJSONobject)
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+
+
+        //  AJAX CALL TO SAVE
+        //
+        // fetch('http://127.0.0.1:8000/api/savegame/', {
+        //     method: 'POST',
+        //     credentials: 'include',
+        //     headers: {
+        //         'Access-Control-Allow-Origin': 'http://localhost:3000',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(this.gameObject)
+        // })
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////
