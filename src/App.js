@@ -9,9 +9,8 @@ import ScratchPad   from './components/ScratchPad';
 import Scale from './components/Scale'
 import Timer   from './components/Timer';
 import {TweenMax, Power3}  from 'gsap';
-// import 'whatwg-fetch'
 import axios from 'axios';
-// import fetch from fetch;
+const querystring = require('query-string')
 
 class App extends Component {
     constructor(props) {
@@ -42,7 +41,7 @@ class App extends Component {
             return {
                 userName: this.userName,
                 gameNumber: this.gameNumber,
-                gameType: this.numberOfCoins,
+                gameType: this.state.numberOfCoins,
                 falseCoin: this.lucky_number + sign,
                 finalScore: "undetermined",
                 measurements: []
@@ -77,65 +76,57 @@ class App extends Component {
         TweenMax.to(this.colr, 20, {h: 0, l: 100, onUpdate: this.applyColor});
     };
     // /COLOR WARP
+
+
 //////////////////////////////////////////////////////////////////////////////////////
     updateGameObject = () => {
-        // let sign = (this.light_or_heavy > 1) ? "+" : "-";
-        // this.userName = "guest"
-        // init_gameObject
-        // this.gameObject = {
-        //     userName: this.userName,
-        //     gameNumber: this.state.gameNumber,
-        //     gameType: this.state.numberOfCoins,
-        //     falseCoin: this.lucky_number + sign
-        // }
-        //
+
         let measuretime = this._child_timer.get_time();
         let ankh_xy = [parseInt(document.getElementById("ankh")._gsTransform.x, 10), parseInt(document.getElementById("ankh")._gsTransform.y, 10)];
         let feather_xy = [parseInt(document.getElementById("feather")._gsTransform.x, 10), parseInt(document.getElementById("feather")._gsTransform.y, 10)];
-//        let measures = [ankh_xy, feather_xy];
+
         let push_position = {'time': measuretime, 'ankh': ankh_xy, 'feather': feather_xy};
         for (let i = this.state.numberOfCoins - 1; i >= 0; i--) {
             const this_coin = document.getElementById('coin' + i);
             const coin_xy = [parseInt(this_coin._gsTransform.x, 10), parseInt(this_coin._gsTransform.y, 10)];
-            // push_position.push(coin_xy);
-            // Object.assign(push_position, )
             push_position['coin' + i] = coin_xy;
         }
-        // Object.assign(this.gameObject.measurements, push_position)
-        this.gameObject.finalScore = this.measurementsUsed + '/3=' + measuretime
-        this.gameObject.measurements.push(push_position)
-        console.log(this.gameObject)
-        console.log("")
+
+        this.gameObject.finalScore = this.measurementsUsed + '/3in' + measuretime;
+        this.gameObject.gameType = this.state.numberOfCoins;
+        this.gameObject.measurements.push(push_position);
+        console.log(this.gameObject);
+        console.log("");
         // console.log(this.gameObject.toString())
         console.log(JSON.stringify(this.gameObject))
+        // console.log(querystring.stringify(this.gameObject))
     };
 //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
 
-
     saveGameObject = (finalScore) => {
-
-
 
         console.log('saveGameObject = (finalScore) => ' + finalScore)
 
-
         this.gameObject.finalScore = finalScore;
 
-
-        // console.log(JSON.stringify(this.gameObject));
-        // console.log();
-        // console.log(this.gameObject);
-
-        // let myJSONobject = JSON.stringify(this.gameObject);
-
+        let dat = querystring.stringify(
+            {
+                falseCoin: this.gameObject.falseCoin,
+                finalScore: this.gameObject.finalScore,
+                gameNumber: this.gameObject.gameNumber,
+                gameType: this.gameObject.gameType,
+                measurements: JSON.stringify(this.gameObject.measurements),
+                userName: this.gameObject.userName
+            }
+        );
 
         axios({
             method: 'post',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: 'http://127.0.0.1:8000/api/savegame/',
             // data: this.gameObject
-            data: this.gameObject
+            data: dat
         });
 
 
@@ -146,22 +137,8 @@ class App extends Component {
         //     .catch(function (error) {
         //         console.log(error);
         //     });
-
-
         //  AJAX CALL TO SAVE
-        //
-        // fetch('http://127.0.0.1:8000/api/savegame/', {
-        //     method: 'POST',
-        //     credentials: 'include',
-        //     headers: {
-        //         'Access-Control-Allow-Origin': 'http://localhost:3000',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(this.gameObject)
-        // })
-
-
-    }
+    };
 
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -182,17 +159,17 @@ class App extends Component {
             gameNumber: this.gameNumber,
             msg: this.readout,
         });
-        let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"]
+        let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
         TweenMax.to(icons, .5, {autoAlpha: 1, ease: Power3.easeOut});
-        TweenMax.to(["#cheat_btn"], 2, {color: "hsl(0, 0%, 100%)"})
-        TweenMax.to(["#messenger"], 2, {color: "hsl(0, 0%, 0%)"})
+        TweenMax.to(["#cheat_btn"], 2, {color: "hsl(0, 0%, 100%)"});
+        TweenMax.to(["#messenger"], 2, {color: "hsl(0, 0%, 0%)"});
         this.reset_coins(numbr);
 
         this.gameObject = this.renew_game_object();
 
     };
     replace_coins = () => {
-        this._child.replace_coins()
+        this._child.replace_coins();
         this.reset_coins()
     };
     reset_coins = (num) => {
@@ -289,7 +266,7 @@ class App extends Component {
                         // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
                         // SAVE VIA AJAX CALL
                         // //
-                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3=' + time)
+                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
 
 
                     } else if (this.measurementsUsed < 4) {
@@ -307,11 +284,12 @@ class App extends Component {
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
 
                         // SAVE GAME
-                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3=' + time)
+                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
 
 
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
+                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
                         if (this.measurementsUsed === 4) {
                         }
                     }

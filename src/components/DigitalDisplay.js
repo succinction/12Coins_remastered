@@ -20,6 +20,13 @@ class Digital_display extends Component {
     // }
     // componentWillUnmount() {
     // }
+
+
+
+
+
+
+
     render() {
         // SECONDS ELAPSED
         let sec = this.props.seconds;
@@ -33,9 +40,16 @@ class Digital_display extends Component {
                     {false && this.digit_images.map((image, i) => <div id={"digit_" + i}><img src={image} alt=""/>
                     </div>)}
                     {<span id="digit_0"><img src={this.digit_images[minsx]} alt=""/></span> }
+
+
+
                     {<span id="digit_1"><img src={this.digit_images[mins]} alt=""/></span> }
                     <span  />
                     {<span id="digit_2"><img src={this.digit_images[secs]} alt=""/></span> }
+
+
+
+
                     {<span id="digit_3"><img src={this.digit_images[secs0]} alt=""/></span> }
                 </div>
             </div>
