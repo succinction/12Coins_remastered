@@ -1,62 +1,75 @@
 import React, {Component} from 'react';
+import Digit from "./Digit";
 
-class Digital_display extends Component {
+class DigitalDisplay extends Component {
+
+
     constructor(props) {
         super(props);
-        this.digit_images = [
-            "digit_images/digit_0.png",
-            "digit_images/digit_1.png",
-            "digit_images/digit_2.png",
-            "digit_images/digit_3.png",
-            "digit_images/digit_4.png",
-            "digit_images/digit_5.png",
-            "digit_images/digit_6.png",
-            "digit_images/digit_7.png",
-            "digit_images/digit_8.png",
-            "digit_images/digit_9.png"
-        ]
+        this.state = {
+            digi_0: 0,
+            digi_1: 0,
+            digi_2: 0,
+            digi_3: 0
+        }
+
     }
-    // componentDidMount() {
-    // }
-    // componentWillUnmount() {
-    // }
 
 
+    componentWillReceiveProps(nextProps) {
 
+        let sec = nextProps.seconds;
+        let minsx = Math.floor(sec / 600)
+        let mins = Math.floor(sec / 60)
+        let secs = Math.floor(sec % 60 / 10)
+        let secs0 = (sec % 10)
 
+        if (this.state.digi_0 !== minsx) {
+            this.setState({digi_0: minsx})
+        }
 
+        if (this.state.digi_1 !== mins) {
+            this.setState({digi_1: mins})
+        }
 
+        if (this.state.digi_2 !== secs) {
+            this.setState({digi_2: secs})
+        }
+
+        if (this.state.digi_3 !== secs0) {
+            this.setState({digi_3: secs0})
+        }
+
+    }
 
     render() {
-        // SECONDS ELAPSED
-        let sec = this.props.seconds;
-        let minsx = Math.floor(sec / 600);
-        let mins = Math.floor(sec / 60);
-        let secs = Math.floor(sec % 60 / 10);
-        let secs0 = (sec % 10);
+
         return (
-            <div>
-                <div>
-                    {false && this.digit_images.map((image, i) => <div id={"digit_" + i}><img src={image} alt=""/>
-                    </div>)}
-                    {<span id="digit_0"><img src={this.digit_images[minsx]} alt=""/></span> }
+            <div className="container">
+
+                <Digit myid="digit_0" source={this.state.digi_0} className="numeral" />
+                <Digit myid="digit_1" source={this.state.digi_1} className="numeral" />
+                <Digit myid="digit_2" source={this.state.digi_2} className="numeral" />
+                <Digit myid="digit_3" source={this.state.digi_3} className="numeral" />
 
 
-
-                    {<span id="digit_1"><img src={this.digit_images[mins]} alt=""/></span> }
-                    <span  />
-                    {<span id="digit_2"><img src={this.digit_images[secs]} alt=""/></span> }
-
-
-
-
-                    {<span id="digit_3"><img src={this.digit_images[secs0]} alt=""/></span> }
-                </div>
             </div>
         );
     }
 }
-export default Digital_display;
+export default DigitalDisplay;
+
+
+// var MyDiv = React.createClass({
+//   render: function() {
+//     var style = {
+//       color: 'white',
+//       fontSize: 200
+//     };
+//
+//     return <div style={style}> Have a good and productive day! </div>;
+//   }
+// });
 
 
 //

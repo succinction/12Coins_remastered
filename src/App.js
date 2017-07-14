@@ -23,7 +23,7 @@ class App extends Component {
         this.measurementsUsed = 0;
         this.readout = "Find the false coin within three measurements on the scale.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1
-        this.version = "2.5.1-2017May";
+        this.version = "2.5.1-2017July";
         this.state = {
             gameNumber: this.gameNumber,
             labels: true,
@@ -43,7 +43,11 @@ class App extends Component {
                 gameNumber: this.gameNumber,
                 gameType: this.state.numberOfCoins,
                 falseCoin: this.lucky_number + sign,
-                finalScore: "undetermined",
+
+                numberOfMeasurements: 0,
+                finalTime: 0,
+
+
                 measurements: []
             }
         };
@@ -92,8 +96,16 @@ class App extends Component {
             push_position['coin' + i] = coin_xy;
         }
 
-        this.gameObject.finalScore = this.measurementsUsed + '/3in' + measuretime;
+        // this.gameObject.finalScore = this.measurementsUsed + '/3in' + measuretime;
+
+
+        this.gameObject.numberOfMeasurements = this.measurementsUsed;
+        this.gameObject.finalTime = measuretime;
+
+
         this.gameObject.gameType = this.state.numberOfCoins;
+
+
         this.gameObject.measurements.push(push_position);
         console.log(this.gameObject);
         console.log("");
@@ -104,36 +116,45 @@ class App extends Component {
 //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
 
-    saveGameObject = (finalScore) => {
+    saveGameObject = (used, time) => {
 
-        console.log('saveGameObject = (finalScore) => ' + finalScore)
+        // console.log('saveGameObject = (finalScore) => ' + finalScore)
 
-        this.gameObject.finalScore = finalScore;
+        // this.gameObject.finalScore = finalScore;
 
         let dat = querystring.stringify(
             {
                 falseCoin: this.gameObject.falseCoin,
-                finalScore: this.gameObject.finalScore,
+                // finalScore: this.gameObject.finalScore,
                 gameNumber: this.gameObject.gameNumber,
+
+                numberOfMeasurements: used,
+                finalTime: time,
+
                 gameType: this.gameObject.gameType,
                 measurements: JSON.stringify(this.gameObject.measurements),
                 userName: this.gameObject.userName
             }
         );
+        console.log(dat)
 
         axios({
             method: 'post',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: 'http://127.0.0.1:8000/api/savegame/',
-            // data: this.gameObject
             data: dat
+
+
+        }).then(function(response) {
+            console.log("response -- ");
+            console.log(response);
         });
 
 
         // axios.post('http://127.0.0.1:8000/api/savegame/', myJSONobject)
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
+            //     .then(function (response) {
+            //         console.log(response);
+            //     })
         //     .catch(function (error) {
         //         console.log(error);
         //     });
@@ -266,7 +287,7 @@ class App extends Component {
                         // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
                         // SAVE VIA AJAX CALL
                         // //
-                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
+                        this.saveGameObject(this.measurementsUsed, time)
 
 
                     } else if (this.measurementsUsed < 4) {
@@ -284,12 +305,14 @@ class App extends Component {
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
 
                         // SAVE GAME
-                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
+                        // this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
+                        this.saveGameObject(this.measurementsUsed, time)
 
 
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
-                        this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
+                        // this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
+                        this.saveGameObject(this.measurementsUsed, time)
                         if (this.measurementsUsed === 4) {
                         }
                     }

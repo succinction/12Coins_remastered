@@ -118,7 +118,7 @@ class LeaderBoard extends Component {
                     <tbody>
                     <tr >
 
-                        <td><a href="#">JBH</a></td>
+                        <td><a href="">JBH</a></td>
                         <td>1</td>
                         <td>4</td>
                         <td>4</td>
@@ -128,7 +128,7 @@ class LeaderBoard extends Component {
                     </tr>
                     <tr>
 
-                        <td><a href="#">Chris</a></td>
+                        <td><a href="">Chris</a></td>
                         <td>2</td>
                         <td>2</td>
                         <td>2</td>
@@ -139,7 +139,7 @@ class LeaderBoard extends Component {
                     </tr>
                     <tr>
 
-                        <td><a href="#">Mazda</a></td>
+                        <td><a href="">Mazda</a></td>
                         <td>3</td>
                         <td>3</td>
                         <td>3</td>

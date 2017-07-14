@@ -13,9 +13,36 @@
 
 }
 
-#digit_2 {
-    padding-left: 1px;
+.container {
+
+    display: flex;
 }
+
+
+.numeral {
+    position: relative;
+    width: 15px;
+    /*border: solid #ff000d 3px;*/
+    /*display: inline-block;*/
+}
+
+
+
+.numeral:nth-child(3)  {
+    padding-left: 2px;
+}
+
+
+.imag {
+    /*display: inline-block;*/
+    position: absolute;
+    top: 0;
+
+    /*opacity: 0;*/
+    visibility:hidden;
+}
+
+
 
 .nav {
     margin-left: 140px;
