@@ -66,8 +66,6 @@ class App extends Component {
         this.element = document.getElementsByTagName("body")[0];
         // /COLOR WARP
 //////////////////////////////////////////////////////////////////////////////////////
-        // init_gameObject
-        // this.gameObject = {}
         this.gameObject = this.renew_game_object();
 //////////////////////////////////////////////////////////////////////////////////////
     }
@@ -96,47 +94,33 @@ class App extends Component {
             push_position['coin' + i] = coin_xy;
         }
 
-        // this.gameObject.finalScore = this.measurementsUsed + '/3in' + measuretime;
-
-
         this.gameObject.numberOfMeasurements = this.measurementsUsed;
         this.gameObject.finalTime = measuretime;
-
-
         this.gameObject.gameType = this.state.numberOfCoins;
-
-
         this.gameObject.measurements.push(push_position);
-        console.log(this.gameObject);
-        console.log("");
+        // console.log(this.gameObject);
+        // console.log("");
         // console.log(this.gameObject.toString())
         console.log(JSON.stringify(this.gameObject))
-        // console.log(querystring.stringify(this.gameObject))
     };
 //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
 
     saveGameObject = (used, time) => {
 
-        // console.log('saveGameObject = (finalScore) => ' + finalScore)
-
-        // this.gameObject.finalScore = finalScore;
 
         let dat = querystring.stringify(
             {
-                falseCoin: this.gameObject.falseCoin,
-                // finalScore: this.gameObject.finalScore,
+                userName: this.gameObject.userName
                 gameNumber: this.gameObject.gameNumber,
-
+                gameType: this.gameObject.gameType,
                 numberOfMeasurements: used,
                 finalTime: time,
-
-                gameType: this.gameObject.gameType,
+                falseCoin: this.gameObject.falseCoin,
                 measurements: JSON.stringify(this.gameObject.measurements),
-                userName: this.gameObject.userName
             }
         );
-        console.log(dat)
+        // console.log(dat)
 
         axios({
             method: 'post',
@@ -146,7 +130,7 @@ class App extends Component {
 
 
         }).then(function(response) {
-            console.log("response -- ");
+            console.log("response --> ");
             console.log(response);
         });
 

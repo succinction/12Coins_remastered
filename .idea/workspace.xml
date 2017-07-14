@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5876223c-194f-4250-b89c-64ad51d49c6f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Clock.js" afterPath="$PROJECT_DIR$/src/components/Clock.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Digit.js" afterPath="$PROJECT_DIR$/src/components/Digit.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/DigitalDisplay.js" afterPath="$PROJECT_DIR$/src/components/DigitalDisplay.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/LeaderBoard.js" afterPath="$PROJECT_DIR$/src/components/LeaderBoard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Timer.js" afterPath="$PROJECT_DIR$/src/components/Timer.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +17,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+            <state relative-caret-position="-1713">
+              <caret line="94" column="9" lean-forward="true" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -45,25 +41,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Clock.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Clock.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Clock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state relative-caret-position="180">
+              <caret line="12" column="62" lean-forward="false" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DigitalDisplay.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/DigitalDisplay.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="49" column="83" lean-forward="false" selection-start-line="49" selection-start-column="83" selection-end-line="49" selection-end-column="83" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,13 +80,6 @@
               <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="digit_1.gif" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/digit_images/digit_1.gif">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -141,8 +118,8 @@
       <find>renew_game_object</find>
       <find>finalScore</find>
       <find>saveGameObject</find>
-      <find>relative</find>
       <find>userName</find>
+      <find>relative</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,11 +133,11 @@
         <option value="$PROJECT_DIR$/src/components/Instructions.js" />
         <option value="$PROJECT_DIR$/src/components/ScratchPad.js" />
         <option value="$PROJECT_DIR$/src/components/Timer.js" />
-        <option value="$PROJECT_DIR$/src/components/Clock.js" />
         <option value="$PROJECT_DIR$/src/components/Digit.js" />
-        <option value="$PROJECT_DIR$/src/components/DigitalDisplay.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/components/LeaderBoard.js" />
+        <option value="$PROJECT_DIR$/src/components/DigitalDisplay.js" />
+        <option value="$PROJECT_DIR$/src/components/Clock.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
@@ -458,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499746621148</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ajax Axios New Timer">
+      <created>1500057411900</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1500057411900</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -495,7 +479,8 @@
     <MESSAGE value="Sending Ajax" />
     <MESSAGE value="Ajax Working" />
     <MESSAGE value="Ajax reworked and Working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajax reworked and Working" />
+    <MESSAGE value="Ajax Axios New Timer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajax Axios New Timer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -821,29 +806,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Timer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/digit_images/digit_1.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="31" column="19" lean-forward="false" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Controls.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -860,10 +822,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/digit_images/digit_1.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/LeaderBoard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="712">
           <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="31" column="19" lean-forward="false" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -876,20 +851,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/DigitalDisplay.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="83" lean-forward="false" selection-start-line="49" selection-start-column="83" selection-end-line="49" selection-end-column="83" />
+        <state relative-caret-position="375">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -898,10 +863,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Clock.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        <state relative-caret-position="180">
+          <caret line="12" column="62" lean-forward="false" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Timer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1713">
+          <caret line="94" column="9" lean-forward="true" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
