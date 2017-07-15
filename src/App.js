@@ -30,12 +30,21 @@ class App extends Component {
             msg: this.readout,
             numberOfCoins: this.numberOfCoins,
             balanced: 0
+
+
         };
         document.onselectstart = function () {
             return false;
         };
         document.body.setAttribute('unselectable', 'on', 0);
-        this.userName = "guest"
+
+        this.userName = "guest";
+
+        this.cheated = false;
+
+        this.gameSaved = 0
+
+
         this.renew_game_object = () => {
             let sign = (this.light_or_heavy > 1) ? "+" : "-";
             return {
@@ -43,11 +52,8 @@ class App extends Component {
                 gameNumber: this.gameNumber,
                 gameType: this.state.numberOfCoins,
                 falseCoin: this.lucky_number + sign,
-
                 numberOfMeasurements: 0,
                 finalTime: 0,
-
-
                 measurements: []
             }
         };
@@ -106,49 +112,65 @@ class App extends Component {
 //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
 
-    saveGameObject = (used, time) => {
 
+    saveGameObject = (used, time, score) => {
+
+        if (this.gameSaved === this.gameObject.gameNumber ) {
+            return;
+        }
+
+
+
+        let change_name = (arg) => {
+            console.log(arg);
+            this.userName = arg;
+            this.gameObject.userName = arg;
+        };
+        let scoretime = (this.cheated) ? time + "-cheat" : time ;
+        let thescore = (this.cheated) ? 0 : score;
 
         let dat = querystring.stringify(
             {
-                userName: this.gameObject.userName
+                userName: this.gameObject.userName,
+                score: thescore,
                 gameNumber: this.gameObject.gameNumber,
                 gameType: this.gameObject.gameType,
                 numberOfMeasurements: used,
-                finalTime: time,
+                finalTime: scoretime ,
                 falseCoin: this.gameObject.falseCoin,
                 measurements: JSON.stringify(this.gameObject.measurements),
             }
         );
-        // console.log(dat)
 
         axios({
             method: 'post',
+            // headers: {'Content-Type': 'application/json'},
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: 'http://127.0.0.1:8000/api/savegame/',
             data: dat
 
-
-        }).then(function(response) {
+        }).then(function (response) {
             console.log("response --> ");
             console.log(response);
+            change_name(response.data.newGuest);
+            // console.log(response.data.newGuest);
+
         });
 
+        this.gameSaved = this.gameObject.gameNumber
 
-        // axios.post('http://127.0.0.1:8000/api/savegame/', myJSONobject)
-            //     .then(function (response) {
-            //         console.log(response);
-            //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-        //  AJAX CALL TO SAVE
+
     };
-
 
 //////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
+
+        if (this.measurementsUsed > 0){
+            this.saveGameObject(this.measurementsUsed, "0:00", 0);
+        }
+
         let lucky_number_init = -1;
+        this.cheated = false;
         this._child_timer.reset_time();
         if (typeof(numbr) === "number") {
             lucky_number_init = Math.floor(Math.random() * numbr);
@@ -178,7 +200,6 @@ class App extends Component {
         this.reset_coins()
     };
     reset_coins = (num) => {
-
         this.readout = this.coin_locations;
         this.coin_location_array = this.reset_location_array(num);
         this.coin_locations = this.coin_location_array.toString();
@@ -254,7 +275,7 @@ class App extends Component {
                     if (this.measurementsUsed < 3) {
                         // WIN
                         // COLOR WARP
-                        TweenMax.to(this.colr, 15, {
+                        TweenMax.to(this.colr, 2, {
                             h: -360,
                             l: 50,
                             onUpdate: this.applyColor,
@@ -271,13 +292,13 @@ class App extends Component {
                         // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
                         // SAVE VIA AJAX CALL
                         // //
-                        this.saveGameObject(this.measurementsUsed, time)
+                        this.saveGameObject(this.measurementsUsed, time, 1);
 
 
                     } else if (this.measurementsUsed < 4) {
                         // WIN
                         // COLOR WARP
-                        TweenMax.to(this.colr, 20, {
+                        TweenMax.to(this.colr, 4, {
                             h: 360,
                             l: 50,
                             onUpdate: this.applyColor,
@@ -290,13 +311,13 @@ class App extends Component {
 
                         // SAVE GAME
                         // this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
-                        this.saveGameObject(this.measurementsUsed, time)
+                        this.saveGameObject(this.measurementsUsed, time, 1);
 
 
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
                         // this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
-                        this.saveGameObject(this.measurementsUsed, time)
+                        this.saveGameObject(this.measurementsUsed, time, 0);
                         if (this.measurementsUsed === 4) {
                         }
                     }
@@ -326,6 +347,13 @@ class App extends Component {
         let lucky_label = ("#coin" + this.lucky_number )
         TweenMax.to(lucky_label, .4, {y: "-=30"})
         TweenMax.to(["#messenger", "#cheat_btn"], 2, {color: "hsl(0, 80%, 60%)"})
+
+
+
+        this.cheated = true;
+
+
+
     };
     coins_3 = () => {
         this.setState({
