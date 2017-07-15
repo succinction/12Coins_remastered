@@ -20,16 +20,9 @@ class Digit extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        //
-        // console.log('')
-        // console.log('######', 'this.props.source : ', this.props.source);
-        // console.log('######', 'nextProps.source : ', nextProps.source);
-        // console.log('')
-
 
         document.getElementById(this.props.myid + "_digit_" + this.props.source).style.visibility = "hidden";
         document.getElementById(this.props.myid + "_digit_" + nextProps.source).style.visibility = "visible";
-
 
     }
 
@@ -49,7 +42,7 @@ class Digit extends Component {
                 {this.digit_images.map((image, i) =>  <img id={this.props.myid + "_digit_" + i} key={i} src={image} alt="" className="imag"  /> )}
 
 
-                {/*<img id={this.props.myid + "_digit_0"} key='0' src={this.digit_images[0]} alt="" className="imag" style={{visibility:"visible"}}  />*/}
+                {/*<img id={this.props.myid + "_digit_0"} key='0' src={this.digit_images[0]} alt="" className="imag" style={{visibility:"visible"}} />*/}
                 {/*<img id={this.props.myid + "_digit_1"} key='1' src={this.digit_images[1]} alt="" className="imag" style={{visibility:"hidden"}}  />*/}
                 {/*<img id={this.props.myid + "_digit_2"} key='2' src={this.digit_images[2]} alt="" className="imag" style={{visibility:"hidden"}}  />*/}
                 {/*<img id={this.props.myid + "_digit_3"} key='3' src={this.digit_images[3]} alt="" className="imag" style={{visibility:"hidden"}}  />*/}

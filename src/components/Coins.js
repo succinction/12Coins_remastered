@@ -113,7 +113,7 @@ class Coins extends Component {
             });
 
             // this.state.labels_on = nextProps.label
-            console.log("this.props.label !== nextProps.label ::COINS :: ", this.props.label !== nextProps.label, nextProps.label)
+            // console.log("this.props.label !== nextProps.label ::COINS :: ", this.props.label !== nextProps.label, nextProps.label)
             // this.state.labels_on = nextProps.label;
 
             return true

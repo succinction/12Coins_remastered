@@ -10,19 +10,19 @@ import Scale from './components/Scale'
 import Timer   from './components/Timer';
 import {TweenMax, Power3}  from 'gsap';
 import axios from 'axios';
-const querystring = require('query-string')
+const querystring = require('query-string');
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.gameNumber = 1;
         const initialNumberOfCoins = 9;
-        this.numberOfCoins = initialNumberOfCoins
+        this.numberOfCoins = initialNumberOfCoins;
         this.lucky_number = Math.floor(Math.random() * initialNumberOfCoins);
         this.coin_weights = [Number(6), Number(5), Number(7)];
         this.measurementsUsed = 0;
         this.readout = "Find the false coin within three measurements on the scale.";
-        this.light_or_heavy = Math.floor(Math.random() * 2) + 1
+        this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
         this.version = "2.5.1-2017July";
         this.state = {
             gameNumber: this.gameNumber,
@@ -113,7 +113,7 @@ class App extends Component {
     //  SAVE GAMEOBJECT
 
 
-    saveGameObject = (used, time, score) => {
+    saveGameObject = (used, time, score, dur) => {
 
         if (this.gameSaved === this.gameObject.gameNumber ) {
             return;
@@ -126,13 +126,17 @@ class App extends Component {
             this.userName = arg;
             this.gameObject.userName = arg;
         };
+        let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time ;
         let thescore = (this.cheated) ? 0 : score;
+        console.log(dur)
 
         let dat = querystring.stringify(
             {
                 userName: this.gameObject.userName,
                 score: thescore,
+                duration: dur,
+                cheat: cheated,
                 gameNumber: this.gameObject.gameNumber,
                 gameType: this.gameObject.gameType,
                 numberOfMeasurements: used,
@@ -166,7 +170,7 @@ class App extends Component {
     reset_game = (numbr) => {
 
         if (this.measurementsUsed > 0){
-            this.saveGameObject(this.measurementsUsed, "0:00", 0);
+            this.saveGameObject(this.measurementsUsed, "0:00", 0, 0);
         }
 
         let lucky_number_init = -1;
@@ -264,6 +268,7 @@ class App extends Component {
     };
     score = (measurement_constituted, coins_on_scale_now) => {
         let time = this._child_timer.get_time();
+        let duration = this._child_timer.get_seconds();
         let number_of_coins = this.state.numberOfCoins;
         let coin_locations_now = this.coin_location_array.toString();
         //
@@ -292,7 +297,7 @@ class App extends Component {
                         // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
                         // SAVE VIA AJAX CALL
                         // //
-                        this.saveGameObject(this.measurementsUsed, time, 1);
+                        this.saveGameObject(this.measurementsUsed, time, 1, duration);
 
 
                     } else if (this.measurementsUsed < 4) {
@@ -310,14 +315,12 @@ class App extends Component {
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
 
                         // SAVE GAME
-                        // this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
-                        this.saveGameObject(this.measurementsUsed, time, 1);
+                        this.saveGameObject(this.measurementsUsed, time, 1, duration);
 
 
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
-                        // this.saveGameObject(number_of_coins + 'in' + this.measurementsUsed + '/3in' + time)
-                        this.saveGameObject(this.measurementsUsed, time, 0);
+                        this.saveGameObject(this.measurementsUsed, time, 0, duration);
                         if (this.measurementsUsed === 4) {
                         }
                     }
@@ -336,7 +339,6 @@ class App extends Component {
             }
         }
         this.coin_locations = coin_locations_now;
-        // this.updateGameObject();
         this.setState({
             msg: this.readout
         })
@@ -348,13 +350,21 @@ class App extends Component {
         TweenMax.to(lucky_label, .4, {y: "-=30"})
         TweenMax.to(["#messenger", "#cheat_btn"], 2, {color: "hsl(0, 80%, 60%)"})
 
-
-
         this.cheated = true;
 
-
-
     };
+
+
+    //////////////////////////////////////////////
+    // coins_ = (num) => {
+    //     this.setState({
+    //         numberOfCoins: num
+    //     });
+    //     this.reset_game(num)
+    // };
+
+    //////////////////////////////////////////////
+    // THESE ARE VERBOSE EXPLICITLY REFERENCED CALLBACKS FOR GOOD REASON
     coins_3 = () => {
         this.setState({
             numberOfCoins: 3

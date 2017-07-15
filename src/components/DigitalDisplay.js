@@ -19,9 +19,9 @@ class DigitalDisplay extends Component {
     componentWillReceiveProps(nextProps) {
 
         let sec = nextProps.seconds;
-        let minsx = Math.floor(sec / 600);
-        let mins = Math.floor(sec / 60);
-        let secs = Math.floor(sec % 60 / 10);
+        let minsx = Math.floor(sec / 600) % 10;
+        let mins = Math.floor(sec / 60) % 10;
+        let secs = Math.floor(sec % 60 / 10) % 10;
         let secs0 = (sec % 10);
 
         if (this.state.digi_0 !== minsx) {
