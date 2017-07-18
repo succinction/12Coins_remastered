@@ -42,7 +42,7 @@ class App extends Component {
 
         this.cheated = false;
 
-        this.gameSaved = 0
+        this.gameSaved = 0;
 
 
         this.renew_game_object = () => {
@@ -110,6 +110,28 @@ class App extends Component {
         console.log(JSON.stringify(this.gameObject))
     };
 //////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+    // REPLAY OBJECT:
+    // PLAYER NAME
+    // GAME NUMBER
+    // DATE
+    // MEASUREMENTS
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
 
 
@@ -118,8 +140,6 @@ class App extends Component {
         if (this.gameSaved === this.gameObject.gameNumber ) {
             return;
         }
-
-
 
         let change_name = (arg) => {
             console.log(arg);
@@ -204,12 +224,12 @@ class App extends Component {
         this.reset_coins()
     };
     reset_coins = (num) => {
-        this.readout = this.coin_locations;
+        // this.readout = this.coin_locations;
         this.coin_location_array = this.reset_location_array(num);
         this.coin_locations = this.coin_location_array.toString();
-        this.readout += " : " + this.coin_locations;
+        // this.readout += " : " + this.coin_locations;
         this.setState({
-            msg: this.readout,
+            // msg: this.readout,
             balanced: 0
         });
     }
@@ -362,7 +382,6 @@ class App extends Component {
     //     });
     //     this.reset_game(num)
     // };
-
     //////////////////////////////////////////////
     // THESE ARE VERBOSE EXPLICITLY REFERENCED CALLBACKS FOR GOOD REASON
     coins_3 = () => {
