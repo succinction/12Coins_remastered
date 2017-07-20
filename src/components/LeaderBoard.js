@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class LeaderBoard extends Component {
     // constructor(props) {
@@ -26,6 +27,45 @@ class LeaderBoard extends Component {
 //     return ;
 // }
 
+    getLeaderBoard(){
+
+
+        axios({
+            method: 'get',
+            headers: {'Content-Type': 'application/json'},
+            // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: 'http://127.0.0.1:8000/api/leaderboard/'
+            // data: dat
+
+        }).then(function (response) {
+            // console.log("response --> ");
+            // console.log(response.data.user);
+            // console.log(response.data.id);
+            // console.log("response [data] --> ");
+            // console.log(response.data);
+            // console.log("response [1] --> ");
+            // console.log(JSON.parse(response.data.measurements));
+            // console.log(JSON.parse(response.data.measurements)[0]);
+            // console.log(JSON.parse(response.data.measurements)[1]);
+            // console.log(JSON.parse(response.data.measurements)[1]["ankh"]);
+            // console.log(JSON.parse(response.data.measurements)[1]["feather"]);
+            // change_name(response.data.newGuest);
+            // console.log(response.data.newGuest);
+
+            let responsedata = JSON.parse(response.data.measurements)
+            // saveState(response.data.user, response.data.id, responsedata)
+
+            // replay()
+
+
+        });
+
+
+
+
+
+    }
+
     render() {
         return (
             <div className="leaders">
@@ -33,6 +73,9 @@ class LeaderBoard extends Component {
                     <thead>
                     <tr>
                         <th colSpan="7">LEADER BOARD</th>
+                    </tr>
+                    <tr>
+                        <th colSpan="7">Refresh</th>
                     </tr>
                     <tr>
                         <th colSpan="7">Your Stats</th>
@@ -49,13 +92,14 @@ class LeaderBoard extends Component {
                     </thead>
                     <tbody>
                     <tr >
-                        <td>JBH</td>
-                        <td>1</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>40</td>
-                        <td>50</td>
-                        <td>0:44</td>
+                        {/*<td>{thisUser.name}</td>*/}
+                        {/*/!*<td>JBH</td>*!/*/}
+                        {/*<td>{thisUser.rank}</td>*/}
+                        {/*<td>{thisUser.currStreak}</td>*/}
+                        {/*<td>{thisUser.bestStreak}</td>*/}
+                        {/*<td>{thisUser.wins}</td>*/}
+                        {/*<td>{thisUser.attempts}</td>*/}
+                        {/*<td>{thisUser.time}</td>*/}
                     </tr>
                     </tbody>
                 </table>

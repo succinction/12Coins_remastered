@@ -95,10 +95,11 @@ tr:nth-child(even) {
 }
 
 #controls {
-    display: inline-block;
+    position: absolute;
     padding-top: 25px;
     padding-bottom: 20px;
-    top: -700px;
+    padding-left: 40px;
+    top: 570px;
 
 }
 

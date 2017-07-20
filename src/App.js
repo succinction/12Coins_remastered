@@ -10,6 +10,7 @@ import Scale from './components/Scale'
 import Timer   from './components/Timer';
 import {TweenMax, Power3}  from 'gsap';
 import axios from 'axios';
+import Controls from "./components/Controls";
 const querystring = require('query-string');
 
 class App extends Component {
@@ -24,8 +25,16 @@ class App extends Component {
         this.readout = "Find the false coin within three measurements on the scale.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
         this.version = "2.5.1-2017July";
+
+        this.userName = "guest";
+        this.lastSavedGame = 0;
+
         this.state = {
             gameNumber: this.gameNumber,
+            userName: this.userName,
+            replayObject: [],
+            rePlayMode: false,
+            lastSavedGame: this.lastSavedGame,
             labels: true,
             msg: this.readout,
             numberOfCoins: this.numberOfCoins,
@@ -38,11 +47,12 @@ class App extends Component {
         };
         document.body.setAttribute('unselectable', 'on', 0);
 
-        this.userName = "guest";
 
         this.cheated = false;
 
         this.gameSaved = 0;
+
+        this.rePlayMode = false;
 
 
         this.renew_game_object = () => {
@@ -109,6 +119,8 @@ class App extends Component {
         // console.log(this.gameObject.toString())
         console.log(JSON.stringify(this.gameObject))
     };
+
+
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
@@ -119,14 +131,75 @@ class App extends Component {
     // MEASUREMENTS
 
 
+    // REPLAY MODE
+
+    enterReplay = (gameID) => {
+
+        console.log('enterReplay: ', gameID);
+
+        // INTRO REPLAY CONTROLS
+
+        // let replay = () => {
+        //     this.rePlayMode = true;
+        // };
 
 
+        let saveState = (a, b, response_data) => {
+            this.setState({
+                userName: a,
+                lastSavedGame: b,
+                rePlayMode: true,
+                replayObject: response_data
+            });
+        };
+
+        // LOAD GAME THROUGH AJAX
+
+        axios({
+            method: 'get',
+            headers: {'Content-Type': 'application/json'},
+            // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: 'http://127.0.0.1:8000/api/game/' + gameID
+            // data: dat
+
+        }).then(function (response) {
+            console.log("response --> ");
+            console.log(response.data.user);
+            console.log(response.data.id);
+            console.log("response [data] --> ");
+            console.log(response.data);
+            console.log("response [1] --> ");
+            console.log(JSON.parse(response.data.measurements));
+            console.log(JSON.parse(response.data.measurements)[0]);
+            console.log(JSON.parse(response.data.measurements)[1]);
+            console.log(JSON.parse(response.data.measurements)[1]["ankh"]);
+            console.log(JSON.parse(response.data.measurements)[1]["feather"]);
+            // change_name(response.data.newGuest);
+            // console.log(response.data.newGuest);
+
+            let responsedata = JSON.parse(response.data.measurements)
+            saveState(response.data.user, response.data.id, responsedata)
+
+            // replay()
 
 
+        });
 
 
+    }
 
 
+    backward_replay = () => {
+        console.log('backward_replay')
+        console.log(this.state.replayObject[0])
+
+    }
+
+    forward_replay = () => {
+        console.log('forward_replay')
+        console.log(this.state.replayObject[1])
+
+    }
 
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -137,30 +210,39 @@ class App extends Component {
 
     saveGameObject = (used, time, score, dur) => {
 
-        if (this.gameSaved === this.gameObject.gameNumber ) {
+        if (this.gameSaved === this.gameObject.gameNumber) {
             return;
         }
 
         let change_name = (arg) => {
-            console.log(arg);
+            // console.log(arg);
             this.userName = arg;
             this.gameObject.userName = arg;
         };
+
+        let SavedGame = (arg, argname) => {
+            this.setState({
+                userName: argname,
+                lastSavedGame: arg,
+            });
+            // console.log(arg);
+        };
+
         let cheated = (this.cheated) ? 'True' : 'False';
-        let scoretime = (this.cheated) ? time + "-cheat" : time ;
+        let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
         console.log(dur)
 
         let dat = querystring.stringify(
             {
                 userName: this.gameObject.userName,
-                score: thescore,
+                won: thescore,
                 duration: dur,
                 cheat: cheated,
                 gameNumber: this.gameObject.gameNumber,
                 gameType: this.gameObject.gameType,
                 numberOfMeasurements: used,
-                finalTime: scoretime ,
+                finalTime: scoretime,
                 falseCoin: this.gameObject.falseCoin,
                 measurements: JSON.stringify(this.gameObject.measurements),
             }
@@ -177,6 +259,7 @@ class App extends Component {
             console.log("response --> ");
             console.log(response);
             change_name(response.data.newGuest);
+            SavedGame(response.data.gameID, response.data.newGuest)
             // console.log(response.data.newGuest);
 
         });
@@ -187,9 +270,12 @@ class App extends Component {
     };
 
 //////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
 
-        if (this.measurementsUsed > 0){
+        if (this.measurementsUsed > 0) {
             this.saveGameObject(this.measurementsUsed, "0:00", 0, 0);
         }
 
@@ -447,6 +533,11 @@ class App extends Component {
                     this._child = child;
                 }} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game}/>
+
+
+                <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
+                          backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
+                          load_fn={this.enterReplay}/>
 
                 {TRUE && <ScratchPad version={this.version}/> }
             </div>
