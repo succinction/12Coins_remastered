@@ -1,15 +1,97 @@
 import React, {Component} from 'react';
 import LeaderBoard from "./LeaderBoard";
+import axios from 'axios';
 
 class ScratchPad extends Component {
+
+
+    constructor(props) {
+        super(props);
+
+        this.state = {response_data: {'init':'init'}}
+    }
+
+    getLeaderBoard() {
+
+        // function setData(responsedat) {
+        //
+        //     this.setState({
+        //         response_data: responsedat
+        //     });
+        // }
+
+        let setData = (responsedat) => {
+            console.log("responsedat : ", responsedat)
+
+
+            this.setState({
+                response_data: responsedat
+            });
+        };
+
+        let url_is = 'http://127.0.0.1:8000/api/leaderboard/' + this.props.user_name;
+        console.log('this username: ', this.props.user_name);
+        console.log('this url_is: ', url_is);
+
+        axios({
+            method: 'get',
+            headers: {'Content-Type': 'application/json'},
+            // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: url_is
+            // data: dat
+
+        }).then(function (response) {
+            console.log('this response: ', response);
+            // let responsedata = JSON.parse(response)
+            let responsedata = response
+            console.log("response [1] --> ");
+            console.log(responsedata);
+
+            setData(responsedata)
+            // replay()
+        });
+
+    }
+
+
+        // componentDidMount() {
+    //
+    // }
+
+// componentDidUpdate(prevProps, prevState) {
+//
+// }
+    componentWillMount() {
+        this.getLeaderBoard()
+
+    }
+
+// componentWillUpdate(nextProps, nextState) {
+//
+// }
+componentWillReceiveProps(nextProps) {
+        console.log("ScratchPad: nextProps: ", nextProps)
+
+        this.getLeaderBoard()
+}
+// componentWillUnmount() {
+//
+// }
+// shouldComponentUpdate(nextProps, nextState) {
+//     return true;
+// }
+
+
     render() {
         return (
             <div className="scratch">
 
-                <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements
+                <h2>Discover the False Coin in
+                    <stroing> 3</stroing>
+                    Measurements
                 </h2>
 
-                <LeaderBoard />
+                <LeaderBoard data={this.state.response_data}/>
 
                 <h3>How to play:</h3>
                 Drag the coins onto the scale. <br />

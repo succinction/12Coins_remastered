@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 class LeaderBoard extends Component {
     // constructor(props) {
     //     super(props);
+    //
+    //     // this.state = {response_data: {}}
     // }
-// componentDidMount() {
-//
-// }
+
+    // componentDidMount() {
+    //
+    // }
+
 // componentDidUpdate(prevProps, prevState) {
 //
 // }
-// componentWillMount() {
+//     componentWillMount() {
+//         this.getLeaderBoard()
 //
-// }
+//     }
+
 // componentWillUpdate(nextProps, nextState) {
 //
 // }
@@ -23,48 +29,66 @@ class LeaderBoard extends Component {
 // componentWillUnmount() {
 //
 // }
-// shouldComponentUpdate(nextProps, nextState) {
-//     return ;
-// }
+shouldComponentUpdate(nextProps, nextState) {
 
-    getLeaderBoard(){
+        console.log("LEADERBOARD shouldComponentUpdate")
+        console.log("nextProps: ", nextProps )
+        console.log("nextProps: attempts", nextProps.data.data.yourStats.attempts )
+        console.log("nextProps: score", nextProps.data.data.yourStats.score )
+        console.log("nextProps: wins", nextProps.data.data.yourStats.wins )
+        console.log("nextProps: bestStreak", nextProps.data.data.yourStats.bestStreak )
 
+    return true;
+}
 
-        axios({
-            method: 'get',
-            headers: {'Content-Type': 'application/json'},
-            // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            url: 'http://127.0.0.1:8000/api/leaderboard/'
-            // data: dat
-
-        }).then(function (response) {
-            // console.log("response --> ");
-            // console.log(response.data.user);
-            // console.log(response.data.id);
-            // console.log("response [data] --> ");
-            // console.log(response.data);
-            // console.log("response [1] --> ");
-            // console.log(JSON.parse(response.data.measurements));
-            // console.log(JSON.parse(response.data.measurements)[0]);
-            // console.log(JSON.parse(response.data.measurements)[1]);
-            // console.log(JSON.parse(response.data.measurements)[1]["ankh"]);
-            // console.log(JSON.parse(response.data.measurements)[1]["feather"]);
-            // change_name(response.data.newGuest);
-            // console.log(response.data.newGuest);
-
-            let responsedata = JSON.parse(response.data.measurements)
-            // saveState(response.data.user, response.data.id, responsedata)
-
-            // replay()
-
-
-        });
-
-
-
-
-
-    }
+    // getLeaderBoard() {
+    //
+    //
+    //     // function setData(responsedat) {
+    //     //
+    //     //     this.setState({
+    //     //         response_data: responsedat
+    //     //     });
+    //     // }
+    //
+    //
+    //     let setData = (responsedat) => {
+    //         console.log("responsedat : ", responsedat)
+    //
+    //
+    //
+    //
+    //         this.setState({
+    //            response_data: responsedat
+    //         });
+    //     };
+    //
+    //
+    //
+    //     let url_is = 'http://127.0.0.1:8000/api/leaderboard/' + this.props.username;
+    //     console.log('this username: ', this.props.username);
+    //     console.log('this url_is: ', url_is);
+    //
+    //     axios({
+    //         method: 'get',
+    //         headers: {'Content-Type': 'application/json'},
+    //         // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //         url: url_is
+    //         // data: dat
+    //
+    //     }).then(function (response) {
+    //         console.log('this response: ', response);
+    //         // let responsedata = JSON.parse(response)
+    //         let responsedata = response
+    //         console.log("response [1] --> ");
+    //         console.log(responsedata);
+    //
+    //         setData(responsedata)
+    //         // replay()
+    //     });
+    //
+    //
+    // }
 
     render() {
         return (
@@ -72,34 +96,35 @@ class LeaderBoard extends Component {
                 <table>
                     <thead>
                     <tr>
-                        <th colSpan="7">LEADER BOARD</th>
+                        <th colSpan="8">LEADER BOARD</th>
                     </tr>
                     <tr>
-                        <th colSpan="7">Refresh</th>
+                        <th colSpan="8">Refresh</th>
                     </tr>
                     <tr>
-                        <th colSpan="7">Your Stats</th>
+                        <th colSpan="8">Your Stats</th>
                     </tr>
                     <tr >
                         <th>Name</th>
-                        <th>Rank</th>
+                        <th>Ranking Score</th>
                         <th>Current Win Streak</th>
                         <th>Best Win Streak</th>
                         <th>Total Wins</th>
                         <th>Total Attempts</th>
-                        <th>Best Time</th>
+                        <th>Accumulated Score</th>
+                        <th>Best Score</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr >
-                        {/*<td>{thisUser.name}</td>*/}
-                        {/*/!*<td>JBH</td>*!/*/}
-                        {/*<td>{thisUser.rank}</td>*/}
-                        {/*<td>{thisUser.currStreak}</td>*/}
-                        {/*<td>{thisUser.bestStreak}</td>*/}
-                        {/*<td>{thisUser.wins}</td>*/}
-                        {/*<td>{thisUser.attempts}</td>*/}
-                        {/*<td>{thisUser.time}</td>*/}
+                        {/*<td>{this.state.response_data.data['yourStats']['username']}</td>*/}
+                        {/*<td>{this.state.response_data.yourStats.yourOverall}</td>*/}
+                        {/*<td>{this.state.response_data.currentStreak}</td>*/}
+                        {/*<td>{this.state.response_data.bestStreak}</td>*/}
+                        {/*<td>{this.state.response_data.wins}</td>*/}
+                        {/*<td>{this.state.response_data.attempts}</td>*/}
+                        {/*<td>{this.state.response_data.score}</td>*/}
+                        {/*<td>{this.state.response_data.bestScore}</td>*/}
                     </tr>
                     </tbody>
                 </table>

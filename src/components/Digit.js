@@ -39,7 +39,7 @@ class Digit extends Component {
             <div className="numeral">
 
 
-                {this.digit_images.map((image, i) =>  <img id={this.props.myid + "_digit_" + i} key={i} src={image} alt="" className="imag"  /> )}
+                {this.digit_images.map((image, i) =>  <img id={this.props.myid + "_digit_" + i} width='24' key={i} src={image} alt="" className="imag"  /> )}
 
 
                 {/*<img id={this.props.myid + "_digit_0"} key='0' src={this.digit_images[0]} alt="" className="imag" style={{visibility:"visible"}} />*/}

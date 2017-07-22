@@ -8,8 +8,8 @@
 
 #timer {
     position: absolute;
-    left: 55px;
-    top: 8px;
+    left: 15px;
+    top: 4px;
 
 }
 
@@ -21,7 +21,7 @@
 
 .numeral {
     position: relative;
-    width: 15px;
+    width: 24px;
     /*border: solid #ff000d 3px;*/
     /*display: inline-block;*/
 }
@@ -272,7 +272,7 @@ a:hover {
 
 .spinner {
     position: absolute;
-    left: 190px;
+    left: 191px;
     right: 0px;
     top: 38px;
 }

@@ -39,21 +39,18 @@ class App extends Component {
             msg: this.readout,
             numberOfCoins: this.numberOfCoins,
             balanced: 0
-
-
         };
+
         document.onselectstart = function () {
             return false;
         };
         document.body.setAttribute('unselectable', 'on', 0);
-
 
         this.cheated = false;
 
         this.gameSaved = 0;
 
         this.rePlayMode = false;
-
 
         this.renew_game_object = () => {
             let sign = (this.light_or_heavy > 1) ? "+" : "-";
@@ -91,7 +88,7 @@ class App extends Component {
         this.element.style.backgroundColor = "hsl(" + this.colr.h + "," + this.colr.s + "%," + this.colr.l + "%)";
     };
     end_color = () => {
-        TweenMax.to(this.colr, 20, {h: 0, l: 100, onUpdate: this.applyColor});
+        TweenMax.to(this.colr, 6, {h: 0, l: 100, onUpdate: this.applyColor});
     };
     // /COLOR WARP
 
@@ -539,7 +536,7 @@ class App extends Component {
                           backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
                           load_fn={this.enterReplay}/>
 
-                {TRUE && <ScratchPad version={this.version}/> }
+                {TRUE && <ScratchPad version={this.version} user_name={this.state.userName} /> }
             </div>
         );
     }

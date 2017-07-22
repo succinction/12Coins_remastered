@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import scale_icon from './scale_svg/scale_icon.svg';
 import {Power3, TimelineLite}  from "gsap";
+
 class Nav extends Component {
 
     componentDidMount() {
