@@ -1,37 +1,34 @@
 import React, {Component} from 'react';
 import LeaderBoard from "./LeaderBoard";
+import Login from "./Login";
 import axios from 'axios';
 
 class ScratchPad extends Component {
-
-
     constructor(props) {
         super(props);
 
-        this.state = {response_data: {'init':'init'}}
+        this.state = {response_data: {'init': 'init'}}
     }
 
-    getLeaderBoard() {
-
-        // function setData(responsedat) {
-        //
-        //     this.setState({
-        //         response_data: responsedat
-        //     });
-        // }
+    getLeaderBoard(username) {
+        console.log("username: " + username)
 
         let setData = (responsedat) => {
-            console.log("responsedat : ", responsedat)
 
-
+            console.log("THIS MEANS AJAX SUCCESS RETURN")
+            console.log("setData : responsedat : ", responsedat)
+            console.log("setData : responsedat : ", responsedat.data)
+            console.log("setData : responsedat : ", responsedat.data.yourStats)
+            console.log("setData : responsedat : ", responsedat.data.yourBestGames)
+            console.log("setData : responsedat : ", responsedat.data.yourLastGames)
             this.setState({
-                response_data: responsedat
+                response_data: responsedat.data
             });
         };
 
-        let url_is = 'http://127.0.0.1:8000/api/leaderboard/' + this.props.user_name;
-        console.log('this username: ', this.props.user_name);
-        console.log('this url_is: ', url_is);
+        let url_is = 'http://127.0.0.1:8000/api/leaderboard/' + username;
+        console.log('getLeaderBoard url: ', url_is);
+        // console.log('getLeaderBoard ... username: ', this.props.user_name);
 
         axios({
             method: 'get',
@@ -39,52 +36,84 @@ class ScratchPad extends Component {
             // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: url_is
             // data: dat
-
         }).then(function (response) {
-            console.log('this response: ', response);
-            // let responsedata = JSON.parse(response)
-            let responsedata = response
-            console.log("response [1] --> ");
-            console.log(responsedata);
-
-            setData(responsedata)
-            // replay()
+            setData(response)
         });
 
     }
 
 
-        // componentDidMount() {
+    // componentDidMount() {
     //
     // }
 
 // componentDidUpdate(prevProps, prevState) {
 //
 // }
-    componentWillMount() {
-        this.getLeaderBoard()
+//     componentWillMount() {
+//         console.log("componentWillMount >>>")
+//         // this.getLeaderBoard()
+//
+//     }
+//
+//     componentWillUpdate(nextProps, nextState) {
+//         console.log("componentWillUpdate >>>")
+//
+//
+//     }
+//
+//     componentDidUpdate(prevProps, prevState) {
+//         console.log("componentDidUpdate>>>")
+//
+//
+//         // this.getLeaderBoard(this.props.user_name)
+//     }
+
+    componentWillReceiveProps(nextProps) {
+
+
+        console.log("ScratchPad: nextProps.last_game: ")
+        console.log("*>>> ", nextProps.last_game, this.props.last_game)
+        console.log("ScratchPad: nextProps.user_name: ")
+        console.log("*>>> ", nextProps.user_name, this.props.user_name)
+
+        if (this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game) {
+
+            this.getLeaderBoard(this.props.user_name)
+        }
+
+
+        // console.log("return", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
+
 
     }
 
-// componentWillUpdate(nextProps, nextState) {
-//
-// }
-componentWillReceiveProps(nextProps) {
-        console.log("ScratchPad: nextProps: ", nextProps)
-
-        this.getLeaderBoard()
-}
 // componentWillUnmount() {
 //
 // }
-// shouldComponentUpdate(nextProps, nextState) {
-//     return true;
-// }
+//     shouldComponentUpdate(nextProps, nextState) {
+//         // if (nextState.response_data !== this.state.response_data) {
+//         //     console.log("SHOULD COMPONENT UPDATE? NEXTSTATE TRUE")
+//         //     return true;
+//         // }
+//
+//         // console.log("ScratchPad: this.props.last_game: ", this.props.last_game)
+//         // console.log("ScratchPad: nextProps.last_game: ", nextProps.last_game)
+//         // console.log("ScratchPad: this.props.user_name: ", this.props.user_name)
+//         // console.log("ScratchPad: nextProps.user_name: ", nextProps.user_name)
+//         console.log("return", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
+//
+//         return this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game;
+//     }
 
 
     render() {
         return (
             <div className="scratch">
+
+
+                <Login />
+
 
                 <h2>Discover the False Coin in
                     <stroing> 3</stroing>
@@ -166,7 +195,7 @@ componentWillReceiveProps(nextProps) {
                 <br />
                 <div className="bottom">
                     <span className="copyright">Copyright 2006-2017   Joseph Howard   | <a
-                        href="mailto:succinction@gmail.com">succinction@gmail.com</a>   | {this.props.version} |    built in react with gsap</span>
+                        href="mailto:succinction@gmail.com">succinction@gmail.com</a>   | 2.5.2-2017July |    built in react with gsap</span>
                 </div>
             </div>
         );

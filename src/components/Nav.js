@@ -25,10 +25,17 @@ class Nav extends Component {
             .from(nav_id[15], .8, {y: -50, autoAlpha: 0, ease: Power3.easeOut}, "-=.7")
     }
 
+
+        // restart()
+        // {
+        //     this.props.reset_fn(0)
+        // }
+
     render() {
         const number_buttons = true;
         const to_15 = (false) ? number_buttons : false;
         const TRUE = true;
+
         return (
             <div className="nav">
                 {TRUE && <button id="restart_btn" className="btn" onClick={this.props.reset_fn}>Restart</button> }

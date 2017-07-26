@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 // import axios from 'axios';
 
 class LeaderBoard extends Component {
-    // constructor(props) {
-    //     super(props);
-    //
-    //     // this.state = {response_data: {}}
-    // }
+    constructor(props) {
+        super(props);
+
+        this.state = {response_data: {}}
+
+        this.initialized = false
+    }
 
     // componentDidMount() {
     //
@@ -20,79 +22,71 @@ class LeaderBoard extends Component {
 //
 //     }
 
-// componentWillUpdate(nextProps, nextState) {
-//
-// }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("LEADERBOARD componentWillUpdate");
+        console.log("nextProps: ", nextProps);
+        console.log("this.props: ", this.props);
+        console.log("LeaderBoard return", this.props.data !== nextProps.data);
+        if (this.props.data !== nextProps.data) {
+            this.initialized = true;
+            this.setState({response_data: nextProps});
+
+
+
+        console.log("nextProps: attempts", nextProps.data.yourStats.attempts )
+        console.log("nextProps: score", nextProps.data.yourStats.score )
+        console.log("nextProps: wins", nextProps.data.yourStats.wins )
+        console.log("nextProps: bestStreak", nextProps.data.yourStats.bestStreak )
+
+        }
+    }
+
+
+    shouldComponentUpdate(nextProps, nextState) {
+
+        console.log("SHOULD this.initialized", this.initialized)
+        console.log("SHOULD nextState",nextState.response_data)
+        console.log("SHOULD return ",this.state.response_data !== nextState.response_data)
+
+        if (this.state.response_data !== nextState.response_data){
+
+        console.log("nextProps: attempts", nextProps.data.yourStats.attempts )
+        console.log("nextProps: score", nextProps.data.yourStats.score )
+        console.log("nextProps: wins", nextProps.data.yourStats.wins )
+        console.log("nextProps: bestStreak", nextProps.data.yourStats.bestStreak )
+        }
+
+
+        return this.state.response_data !== nextState.response_data;
+
+
+    }
+
+    // componentWillUpdate(nextProps, nextState) {
+    //
+    //
+    //
+    //
+    //
+    // }
+
 // componentWillReceiveProps(nextProps) {
 //
 // }
 // componentWillUnmount() {
 //
 // }
-shouldComponentUpdate(nextProps, nextState) {
 
-        console.log("LEADERBOARD shouldComponentUpdate")
-        console.log("nextProps: ", nextProps )
-        console.log("nextProps: attempts", nextProps.data.data.yourStats.attempts )
-        console.log("nextProps: score", nextProps.data.data.yourStats.score )
-        console.log("nextProps: wins", nextProps.data.data.yourStats.wins )
-        console.log("nextProps: bestStreak", nextProps.data.data.yourStats.bestStreak )
 
-    return true;
-}
-
-    // getLeaderBoard() {
-    //
-    //
-    //     // function setData(responsedat) {
-    //     //
-    //     //     this.setState({
-    //     //         response_data: responsedat
-    //     //     });
-    //     // }
-    //
-    //
-    //     let setData = (responsedat) => {
-    //         console.log("responsedat : ", responsedat)
-    //
-    //
-    //
-    //
-    //         this.setState({
-    //            response_data: responsedat
-    //         });
-    //     };
-    //
-    //
-    //
-    //     let url_is = 'http://127.0.0.1:8000/api/leaderboard/' + this.props.username;
-    //     console.log('this username: ', this.props.username);
-    //     console.log('this url_is: ', url_is);
-    //
-    //     axios({
-    //         method: 'get',
-    //         headers: {'Content-Type': 'application/json'},
-    //         // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //         url: url_is
-    //         // data: dat
-    //
-    //     }).then(function (response) {
-    //         console.log('this response: ', response);
-    //         // let responsedata = JSON.parse(response)
-    //         let responsedata = response
-    //         console.log("response [1] --> ");
-    //         console.log(responsedata);
-    //
-    //         setData(responsedata)
-    //         // replay()
-    //     });
-    //
-    //
-    // }
 
     render() {
         return (
             <div className="leaders">
+
+
+                <h1>Hi  {this.initialized && this.state.response_data.data.yourStats.yourOverall} </h1>
+
                 <table>
                     <thead>
                     <tr>
@@ -117,14 +111,14 @@ shouldComponentUpdate(nextProps, nextState) {
                     </thead>
                     <tbody>
                     <tr >
-                        {/*<td>{this.state.response_data.data['yourStats']['username']}</td>*/}
-                        {/*<td>{this.state.response_data.yourStats.yourOverall}</td>*/}
-                        {/*<td>{this.state.response_data.currentStreak}</td>*/}
-                        {/*<td>{this.state.response_data.bestStreak}</td>*/}
-                        {/*<td>{this.state.response_data.wins}</td>*/}
-                        {/*<td>{this.state.response_data.attempts}</td>*/}
-                        {/*<td>{this.state.response_data.score}</td>*/}
-                        {/*<td>{this.state.response_data.bestScore}</td>*/}
+                        {/*<td>{this.state.response_data.data.data.yourStats.attempts}</td>*/}
+                        <td> HI TRUE {this.initialized && this.state.response_data.data.yourStats.yourOverall}</td>
+                        {/*<td>{this.state.response_data.data.data.currentStreak}</td>*/}
+                        {/*<td>{this.state.response_data.data.data.bestStreak}</td>*/}
+                        {/*<td>{this.state.response_data.data.data.wins}</td>*/}
+                        {/*<td>{this.state.response_data.data.data.attempts}</td>*/}
+                        {/*<td>{this.state.response_data.data.data.score}</td>*/}
+                        {/*<td>{this.state.response_data.data.data.bestScore}</td>*/}
                     </tr>
                     </tbody>
                 </table>

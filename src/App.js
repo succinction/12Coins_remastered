@@ -24,9 +24,40 @@ class App extends Component {
         this.measurementsUsed = 0;
         this.readout = "Find the false coin within three measurements on the scale.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
-        this.version = "2.5.1-2017July";
+        // this.version = "2.5.1-2017July";
 
-        this.userName = "guest";
+
+        this.login_fn = (response_name) => {
+            console.log("response_name : " + response_name)
+
+            let name = localStorage.getItem("name");
+
+            console.log("localStorage.getItem('name') : " + name)
+
+
+            if (name === null || name === "null") {
+                name = 'guest';
+                this.userName = name;
+                // localStorage.setItem("name", name);
+            }
+
+            if (response_name !== null) {
+                if (response_name !== name ){
+                    name = response_name;
+                    this.userName = name;
+                    this.setState({
+                        userName: this.userName
+                    })
+                }
+            }
+            localStorage.setItem("name", name);
+            return name
+        };
+
+        this.userName = this.login_fn(null);
+
+        // localStorage.setItem("name", name);
+        // this.userName = "Guest_63";
         this.lastSavedGame = 0;
 
         this.state = {
@@ -141,10 +172,10 @@ class App extends Component {
         // };
 
 
-        let saveState = (a, b, response_data) => {
+        let saveState = (data_user, data_id, response_data) => {
             this.setState({
-                userName: a,
-                lastSavedGame: b,
+                userName: data_user,
+                lastSavedGame: data_id,
                 rePlayMode: true,
                 replayObject: response_data
             });
@@ -213,16 +244,30 @@ class App extends Component {
 
         let change_name = (arg) => {
             // console.log(arg);
-            this.userName = arg;
-            this.gameObject.userName = arg;
+            if (this.userName !== arg) {
+                this.login_fn(arg)
+                this.userName = arg;
+                this.gameObject.userName = arg;
+            }
         };
 
-        let SavedGame = (arg, argname) => {
-            this.setState({
-                userName: argname,
-                lastSavedGame: arg,
-            });
-            // console.log(arg);
+        let SavedGame = (gameID, argname) => {
+
+            if (this.state.userName !== argname) {
+                this.setState({
+                    userName: argname,
+                    lastSavedGame: gameID
+                });
+
+                this.login_fn(argname)
+
+
+            } else {
+                this.setState({
+                    lastSavedGame: gameID
+                });
+            }
+
         };
 
         let cheated = (this.cheated) ? 'True' : 'False';
@@ -272,6 +317,13 @@ class App extends Component {
 //////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
 
+        // console.log("number passed : ", numbr)
+
+
+        if (typeof(numbr) !== "number") {
+            numbr = this.state.numberOfCoins
+        }
+
         if (this.measurementsUsed > 0) {
             this.saveGameObject(this.measurementsUsed, "0:00", 0, 0);
         }
@@ -289,15 +341,21 @@ class App extends Component {
         this.lucky_number = lucky_number_init;
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
         this.gameNumber++;
-        this.setState({
-            gameNumber: this.gameNumber,
-            msg: this.readout,
-        });
         let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
         TweenMax.to(icons, .5, {autoAlpha: 1, ease: Power3.easeOut});
         TweenMax.to(["#cheat_btn"], 2, {color: "hsl(0, 0%, 100%)"});
         TweenMax.to(["#messenger"], 2, {color: "hsl(0, 0%, 0%)"});
+
+        this.setState({
+            numberOfCoins: numbr,
+            gameNumber: this.gameNumber,
+            msg: this.readout,
+        });
+
         this.reset_coins(numbr);
+
+        // this.coin_location_array = this.reset_location_array(numbr);
+        // this.coin_locations = this.coin_location_array.toString();
 
         this.gameObject = this.renew_game_object();
 
@@ -442,9 +500,13 @@ class App extends Component {
             }
         }
         this.coin_locations = coin_locations_now;
+
+
+        ////////
         this.setState({
             msg: this.readout
         })
+        ///////
     };
 /////////////////////////// BUTTONS //////////////////////////////////////////
     show_cheat = () => {
@@ -468,39 +530,39 @@ class App extends Component {
     //////////////////////////////////////////////
     // THESE ARE VERBOSE EXPLICITLY REFERENCED CALLBACKS FOR GOOD REASON
     coins_3 = () => {
-        this.setState({
-            numberOfCoins: 3
-        });
+        // this.setState({
+        //     numberOfCoins: 3
+        // });
         this.reset_game(3)
     };
     coins_6 = () => {
-        this.setState({
-            numberOfCoins: 6
-        });
+        // this.setState({
+        //     numberOfCoins: 6
+        // });
         this.reset_game(6)
     };
     coins_9 = () => {
-        this.setState({
-            numberOfCoins: 9
-        });
+        // this.setState({
+        //     numberOfCoins: 9
+        // });
         this.reset_game(9)
     };
     coins_10 = () => {
-        this.setState({
-            numberOfCoins: 10
-        });
+        // this.setState({
+        //     numberOfCoins: 10
+        // });
         this.reset_game(10)
     };
     coins_11 = () => {
-        this.setState({
-            numberOfCoins: 11
-        });
+        // this.setState({
+        //     numberOfCoins: 11
+        // });
         this.reset_game(11)
     };
     coins_12 = () => {
-        this.setState({
-            numberOfCoins: 12
-        });
+        // this.setState({
+        //     numberOfCoins: 12
+        // });
         this.reset_game(12)
     };
     toggle_labels = () => {
@@ -509,34 +571,46 @@ class App extends Component {
         });
         // console.log('labels: !this.state.labels : ', this.state.labels)
     };
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return true;
+    // }
+
+
     render() {
         let TRUE = true;
         return (
             <div className="App" id="app_id">
+
                 {TRUE && <Bg />}
+
                 {TRUE && <Scale balanced={this.state.balanced}/>}
+
                 {TRUE && <Timer ref={(child) => {
                     this._child_timer = child;
                 }}/>}
-                {TRUE && <Instructions version={this.version}/>}
+
+                {TRUE && <Instructions />}
+
                 {TRUE && <Message msg={this.state.msg} className="messenger" id="messenger"/>}
+
                 <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
                      coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
                      coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
                      replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
                      label_fn={this.toggle_labels}/>
+
                 <Coins ref={(child) => {
                     this._child = child;
                 }} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game}/>
 
-
                 <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
                           backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
                           load_fn={this.enterReplay}/>
 
-                {TRUE && <ScratchPad version={this.version} user_name={this.state.userName} /> }
+                {TRUE && <ScratchPad user_name={this.state.userName} last_game={this.state.lastSavedGame}/> }
             </div>
         );
     }
