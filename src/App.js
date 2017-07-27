@@ -28,11 +28,11 @@ class App extends Component {
 
 
         this.login_fn = (response_name) => {
-            console.log("response_name : " + response_name)
+            // console.log("response_name : " + response_name)
 
             let name = localStorage.getItem("name");
 
-            console.log("localStorage.getItem('name') : " + name)
+            // console.log("localStorage.getItem('name') : " + name)
 
 
             if (name === null || name === "null") {
@@ -145,7 +145,7 @@ class App extends Component {
         // console.log(this.gameObject);
         // console.log("");
         // console.log(this.gameObject.toString())
-        console.log(JSON.stringify(this.gameObject))
+        // console.log(JSON.stringify(this.gameObject))
     };
 
 
@@ -163,7 +163,7 @@ class App extends Component {
 
     enterReplay = (gameID) => {
 
-        console.log('enterReplay: ', gameID);
+        // console.log('enterReplay: ', gameID);
 
         // INTRO REPLAY CONTROLS
 
@@ -191,17 +191,17 @@ class App extends Component {
             // data: dat
 
         }).then(function (response) {
-            console.log("response --> ");
-            console.log(response.data.user);
-            console.log(response.data.id);
-            console.log("response [data] --> ");
-            console.log(response.data);
-            console.log("response [1] --> ");
-            console.log(JSON.parse(response.data.measurements));
-            console.log(JSON.parse(response.data.measurements)[0]);
-            console.log(JSON.parse(response.data.measurements)[1]);
-            console.log(JSON.parse(response.data.measurements)[1]["ankh"]);
-            console.log(JSON.parse(response.data.measurements)[1]["feather"]);
+            // console.log("response --> ");
+            // console.log(response.data.user);
+            // console.log(response.data.id);
+            // console.log("response [data] --> ");
+            // console.log(response.data);
+            // console.log("response [1] --> ");
+            // console.log(JSON.parse(response.data.measurements));
+            // console.log(JSON.parse(response.data.measurements)[0]);
+            // console.log(JSON.parse(response.data.measurements)[1]);
+            // console.log(JSON.parse(response.data.measurements)[1]["ankh"]);
+            // console.log(JSON.parse(response.data.measurements)[1]["feather"]);
             // change_name(response.data.newGuest);
             // console.log(response.data.newGuest);
 
@@ -273,7 +273,7 @@ class App extends Component {
         let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
-        console.log(dur)
+        // console.log(dur)
 
         let dat = querystring.stringify(
             {
@@ -298,8 +298,8 @@ class App extends Component {
             data: dat
 
         }).then(function (response) {
-            console.log("response --> ");
-            console.log(response);
+            // console.log("response --> ");
+            // console.log(response);
             change_name(response.data.newGuest);
             SavedGame(response.data.gameID, response.data.newGuest)
             // console.log(response.data.newGuest);

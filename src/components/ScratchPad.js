@@ -11,23 +11,23 @@ class ScratchPad extends Component {
     }
 
     getLeaderBoard(username) {
-        console.log("username: " + username)
+        // console.log("username: " + username)
 
         let setData = (responsedat) => {
 
-            console.log("THIS MEANS AJAX SUCCESS RETURN")
-            console.log("setData : responsedat : ", responsedat)
-            console.log("setData : responsedat : ", responsedat.data)
-            console.log("setData : responsedat : ", responsedat.data.yourStats)
-            console.log("setData : responsedat : ", responsedat.data.yourBestGames)
-            console.log("setData : responsedat : ", responsedat.data.yourLastGames)
+            // console.log("THIS MEANS AJAX SUCCESS RETURN")
+            // console.log("setData : responsedat : ", responsedat)
+            // console.log("setData : responsedat : ", responsedat.data)
+            // console.log("setData : responsedat : ", responsedat.data.yourStats)
+            // console.log("setData : responsedat : ", responsedat.data.yourBestGames)
+            // console.log("setData : responsedat : ", responsedat.data.yourLastGames)
             this.setState({
                 response_data: responsedat.data
             });
         };
 
         let url_is = 'http://127.0.0.1:8000/api/leaderboard/' + username;
-        console.log('getLeaderBoard url: ', url_is);
+        // console.log('getLeaderBoard url: ', url_is);
         // console.log('getLeaderBoard ... username: ', this.props.user_name);
 
         axios({
@@ -72,10 +72,10 @@ class ScratchPad extends Component {
     componentWillReceiveProps(nextProps) {
 
 
-        console.log("ScratchPad: nextProps.last_game: ")
-        console.log("*>>> ", nextProps.last_game, this.props.last_game)
-        console.log("ScratchPad: nextProps.user_name: ")
-        console.log("*>>> ", nextProps.user_name, this.props.user_name)
+        // console.log("ScratchPad: nextProps.last_game: ")
+        // console.log("*>>> ", nextProps.last_game, this.props.last_game)
+        // console.log("ScratchPad: nextProps.user_name: ")
+        // console.log("*>>> ", nextProps.user_name, this.props.user_name)
 
         if (this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game) {
 
