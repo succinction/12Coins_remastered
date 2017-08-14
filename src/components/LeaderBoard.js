@@ -14,13 +14,13 @@ class LeaderBoard extends Component {
     //
     // }
 
-// componentDidUpdate(prevProps, prevState) {
-//
-// }
-//     componentWillMount() {
-//         this.getLeaderBoard()
-//
-//     }
+    // componentDidUpdate(prevProps, prevState) {
+    //
+    // }
+    //     componentWillMount() {
+    //         this.getLeaderBoard()
+    //
+    //     }
 
 
     componentWillReceiveProps(nextProps) {
@@ -49,13 +49,13 @@ class LeaderBoard extends Component {
         // console.log("SHOULD nextState",nextState.response_data)
         // console.log("SHOULD return ",this.state.response_data !== nextState.response_data)
 
-        if (this.state.response_data !== nextState.response_data){
+        // if (this.state.response_data !== nextState.response_data){
 
         // console.log("nextProps.data.bestPlayers.username", nextProps.data.bestPlayers.username )
         // console.log("nextProps.data.bestPlayers.score ", nextProps.data.bestPlayers.score )
         // console.log("nextProps.data.bestPlayers.wins", nextProps.data.bestPlayers.wins )
         // console.log("nextProps.data.bestPlayers.bestStreak", nextProps.data.bestPlayers.bestStreak )
-        }
+        // }
 
 
         return this.state.response_data !== nextState.response_data;
@@ -71,30 +71,28 @@ class LeaderBoard extends Component {
     //
     // }
 
-// componentWillReceiveProps(nextProps) {
-//
-// }
-// componentWillUnmount() {
-//
-// }
+    // componentWillReceiveProps(nextProps) {
+    //
+    // }
+    // componentWillUnmount() {
+    //
+    // }
 
 
 
     render() {
         return (
             <div className="leaders">
-
-
                 <table>
                     <thead>
                     <tr>
-                        <th colSpan="8">LEADER BOARD</th>
+                        <th colSpan="8">LEADER BOARD (In beta, nothing guaranteed.)</th>
                     </tr>
                     {/*<tr>*/}
                         {/*<th colSpan="8">Refresh</th>*/}
                     {/*</tr>*/}
                     <tr>
-                        <th colSpan="8">Your Stats</th>
+                        <th colSpan="8">Your Stats (You are: {this.initialized && this.state.response_data.data.yourStats.username}) </th>
                     </tr>
                     <tr >
                         <th>Name</th>
@@ -256,7 +254,7 @@ class LeaderBoard extends Component {
 
                     <thead>
                     <tr>
-                        <th colSpan="7">Your Recent Games | Your Top Games</th>
+                        <th colSpan="7">Your Recent Games</th>
                     </tr>
                     <tr>
                         <th>Game ID</th>
