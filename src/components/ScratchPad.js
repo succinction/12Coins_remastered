@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import LeaderBoard from "./LeaderBoard";
-import Login from "./Login";
+// import Login from "./Login";
 import axios from 'axios';
 
 class ScratchPad extends Component {
@@ -111,14 +111,11 @@ class ScratchPad extends Component {
         return (
             <div className="scratch">
 
+{/*LOGIN NOT FULLY IMPLEMENTED*/}
+                {/*<Login />*/}
 
-                <Login />
 
-
-                <h2>Discover the False Coin in
-                    <stroing> 3</stroing>
-                    Measurements
-                </h2>
+                <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements</h2>
 
                 <LeaderBoard data={this.state.response_data}/>
 

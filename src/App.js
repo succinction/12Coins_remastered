@@ -24,16 +24,10 @@ class App extends Component {
         this.measurementsUsed = 0;
         this.readout = "Find the false coin within three measurements on the scale.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
-        // this.version = "2.5.1-2017July";
-
 
         this.login_fn = (response_name) => {
-            // console.log("response_name : " + response_name)
 
             let name = localStorage.getItem("name");
-
-            // console.log("localStorage.getItem('name') : " + name)
-
 
             if (name === null || name === "null") {
                 name = 'guest';
@@ -142,10 +136,6 @@ class App extends Component {
         this.gameObject.finalTime = measuretime;
         this.gameObject.gameType = this.state.numberOfCoins;
         this.gameObject.measurements.push(push_position);
-        // console.log(this.gameObject);
-        // console.log("");
-        // console.log(this.gameObject.toString())
-        // console.log(JSON.stringify(this.gameObject))
     };
 
 
@@ -191,43 +181,25 @@ class App extends Component {
             // data: dat
 
         }).then(function (response) {
-            // console.log("response --> ");
-            // console.log(response.data.user);
-            // console.log(response.data.id);
-            // console.log("response [data] --> ");
-            // console.log(response.data);
-            // console.log("response [1] --> ");
-            // console.log(JSON.parse(response.data.measurements));
-            // console.log(JSON.parse(response.data.measurements)[0]);
-            // console.log(JSON.parse(response.data.measurements)[1]);
-            // console.log(JSON.parse(response.data.measurements)[1]["ankh"]);
-            // console.log(JSON.parse(response.data.measurements)[1]["feather"]);
-            // change_name(response.data.newGuest);
-            // console.log(response.data.newGuest);
-
-            let responsedata = JSON.parse(response.data.measurements)
+            let responsedata = JSON.parse(response.data.measurements);
             saveState(response.data.user, response.data.id, responsedata)
-
-            // replay()
-
-
         });
 
 
-    }
+    };
 
 
     backward_replay = () => {
-        console.log('backward_replay')
+        console.log('backward_replay');
         console.log(this.state.replayObject[0])
 
-    }
+    };
 
     forward_replay = () => {
-        console.log('forward_replay')
+        console.log('forward_replay');
         console.log(this.state.replayObject[1])
 
-    }
+    };
 
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -273,7 +245,6 @@ class App extends Component {
         let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
-        // console.log(dur)
 
         let dat = querystring.stringify(
             {
@@ -298,12 +269,8 @@ class App extends Component {
             data: dat
 
         }).then(function (response) {
-            // console.log("response --> ");
-            // console.log(response);
             change_name(response.data.newGuest);
             SavedGame(response.data.gameID, response.data.newGuest)
-            // console.log(response.data.newGuest);
-
         });
 
         this.gameSaved = this.gameObject.gameNumber
@@ -316,10 +283,7 @@ class App extends Component {
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
-
         // console.log("number passed : ", numbr)
-
-
         if (typeof(numbr) !== "number") {
             numbr = this.state.numberOfCoins
         }
@@ -511,9 +475,9 @@ class App extends Component {
 /////////////////////////// BUTTONS //////////////////////////////////////////
     show_cheat = () => {
         //console.log("Cheating")
-        let lucky_label = ("#coin" + this.lucky_number )
-        TweenMax.to(lucky_label, .4, {y: "-=30"})
-        TweenMax.to(["#messenger", "#cheat_btn"], 2, {color: "hsl(0, 80%, 60%)"})
+        let lucky_label = ("#coin" + this.lucky_number );
+        TweenMax.to(lucky_label, .4, {y: "-=30"});
+        TweenMax.to(["#messenger", "#cheat_btn"], 2, {color: "hsl(0, 80%, 60%)"});
 
         this.cheated = true;
 
@@ -530,39 +494,21 @@ class App extends Component {
     //////////////////////////////////////////////
     // THESE ARE VERBOSE EXPLICITLY REFERENCED CALLBACKS FOR GOOD REASON
     coins_3 = () => {
-        // this.setState({
-        //     numberOfCoins: 3
-        // });
         this.reset_game(3)
     };
     coins_6 = () => {
-        // this.setState({
-        //     numberOfCoins: 6
-        // });
         this.reset_game(6)
     };
     coins_9 = () => {
-        // this.setState({
-        //     numberOfCoins: 9
-        // });
         this.reset_game(9)
     };
     coins_10 = () => {
-        // this.setState({
-        //     numberOfCoins: 10
-        // });
         this.reset_game(10)
     };
     coins_11 = () => {
-        // this.setState({
-        //     numberOfCoins: 11
-        // });
         this.reset_game(11)
     };
     coins_12 = () => {
-        // this.setState({
-        //     numberOfCoins: 12
-        // });
         this.reset_game(12)
     };
     toggle_labels = () => {

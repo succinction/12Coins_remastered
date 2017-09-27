@@ -127,8 +127,8 @@ class LeaderBoard extends Component {
                     <tr >
                         <th>Player Name</th>
                         <th>Ranking Score</th>
-                        <th>Current Win Streak</th>
                         <th>Best Win Streak</th>
+                        <th>Current Win Streak</th>
                         <th>Total Wins</th>
                         <th>Total Attempts</th>
                         <th>Accumulated Score</th>
