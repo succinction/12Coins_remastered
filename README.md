@@ -1,1 +1,1 @@
-# Solves the 12 coin puzzle
+# 12 coin puzzle with coins and scale.
