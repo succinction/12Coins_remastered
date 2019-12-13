@@ -10,13 +10,7 @@ class LeaderBoard extends Component {
         this.initialized = false
     }
 
-    // componentDidMount() {
-    //
-    // }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //
-    // }
     //     componentWillMount() {
     //         this.getLeaderBoard()
     //
@@ -62,23 +56,6 @@ class LeaderBoard extends Component {
 
 
     }
-
-    // componentWillUpdate(nextProps, nextState) {
-    //
-    //
-    //
-    //
-    //
-    // }
-
-    // componentWillReceiveProps(nextProps) {
-    //
-    // }
-    // componentWillUnmount() {
-    //
-    // }
-
-
 
     render() {
         return (
