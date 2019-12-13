@@ -1,20 +1,40 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import LeaderBoard from "./LeaderBoard";
 import Login from "./Login";
+import Accordion from "./Accordion";
 import axios from 'axios';
 
 class ScratchPad extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            response_data: { 'init': 'init' },
+            controler: { identifier: "", group: "" },
+        }
 
-        this.state = {response_data: {'init': 'init'}}
+
     }
+
+    //     componentDidUpdate(prevProps, prevState) {
+    //         console.log("componentDidUpdate>>>")
+    //         // this.getLeaderBoard(this.props.user_name)
+    //     }
+
+    componentWillReceiveProps(nextProps) {
+        // console.log("ScratchPad: nextProps.last_game: ")
+        // console.log("*>>> ", nextProps.last_game, this.props.last_game)
+        // console.log("ScratchPad: nextProps.user_name: ")
+        // console.log("*>>> ", nextProps.user_name, this.props.user_name)
+        if (this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game) {
+            this.getLeaderBoard(this.props.user_name)
+        }
+        // console.log("return", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
+    }
+
 
     getLeaderBoard(username) {
         // console.log("username: " + username)
-
         let setData = (responsedat) => {
-
             // console.log("THIS MEANS AJAX SUCCESS RETURN")
             // console.log("setData : responsedat : ", responsedat)
             // console.log("setData : responsedat : ", responsedat.data)
@@ -32,7 +52,7 @@ class ScratchPad extends Component {
 
         axios({
             method: 'get',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: url_is
             // data: dat
@@ -42,82 +62,26 @@ class ScratchPad extends Component {
 
     }
 
-
-    // componentDidMount() {
-    //
-    // }
-
-// componentDidUpdate(prevProps, prevState) {
-//
-// }
-//     componentWillMount() {
-//         console.log("componentWillMount >>>")
-//         // this.getLeaderBoard()
-//
-//     }
-//
-//     componentWillUpdate(nextProps, nextState) {
-//         console.log("componentWillUpdate >>>")
-//
-//
-//     }
-//
-//     componentDidUpdate(prevProps, prevState) {
-//         console.log("componentDidUpdate>>>")
-//
-//
-//         // this.getLeaderBoard(this.props.user_name)
-//     }
-
-    componentWillReceiveProps(nextProps) {
-
-
-        // console.log("ScratchPad: nextProps.last_game: ")
-        // console.log("*>>> ", nextProps.last_game, this.props.last_game)
-        // console.log("ScratchPad: nextProps.user_name: ")
-        // console.log("*>>> ", nextProps.user_name, this.props.user_name)
-
-        if (this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game) {
-
-            this.getLeaderBoard(this.props.user_name)
-        }
-
-
-        // console.log("return", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
-
-
+    groupFn = (o) => {
+        this.setState({ controler: { identifier: o.myID, group: o.groupID } })
     }
 
-// componentWillUnmount() {
-//
-// }
-//     shouldComponentUpdate(nextProps, nextState) {
-//         // if (nextState.response_data !== this.state.response_data) {
-//         //     console.log("SHOULD COMPONENT UPDATE? NEXTSTATE TRUE")
-//         //     return true;
-//         // }
-//
-//         // console.log("ScratchPad: this.props.last_game: ", this.props.last_game)
-//         // console.log("ScratchPad: nextProps.last_game: ", nextProps.last_game)
-//         // console.log("ScratchPad: this.props.user_name: ", this.props.user_name)
-//         // console.log("ScratchPad: nextProps.user_name: ", nextProps.user_name)
-//         console.log("return", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
-//
-//         return this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game;
-//     }
-
+    callbackFn = (bool) => {
+        // Do some side effect
+        // console.log("callbackFn(" + bool + ")")
+    }
 
     render() {
         return (
             <div className="scratch">
 
-{/*LOGIN NOT FULLY IMPLEMENTED*/}
+                {/*LOGIN NOT FULLY IMPLEMENTED*/}
                 <Login />
 
 
                 <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements</h2>
 
-                <LeaderBoard data={this.state.response_data}/>
+                <LeaderBoard data={this.state.response_data} />
 
                 <h3>How to play:</h3>
                 Drag the coins onto the scale. <br />
@@ -180,14 +144,21 @@ class ScratchPad extends Component {
                 <ul>
                     <li>report bugs to <a href="mailto:succinction@gmail.com">succinction@gmail.com</a></li>
                 </ul>
-                <h4>Demonstration:</h4>
-                <div className="video">
-                    <p>
-                        {true && <iframe title="vid" id="video" width="640" height="360"
-                                         src="https://www.youtube.com/embed/sk6q6sG-7Ls?rel=0"
-                                         allowFullScreen></iframe> }
-                    </p>
-                </div>
+
+
+                <button id="accordionClicker1">Demonstration of solution: (Spoiler)</button>
+                
+    {/* <Accordion ID="me_1" actionID="accordionClicker1" groupID="AAA"  groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn} > */}
+
+                <Accordion actionID="accordionClicker1" groupID="AAA"  groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                    <div className="video">
+                        <p>
+                            {true && <iframe title="vid" id="video" width="640" height="360"
+                                src="https://www.youtube.com/embed/sk6q6sG-7Ls?rel=0"
+                                allowFullScreen></iframe>}
+                        </p>
+                    </div>
+                </Accordion>
 
                 <br />
                 <div className="bottom">
