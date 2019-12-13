@@ -4,17 +4,9 @@ import React, {Component} from 'react';
 class LeaderBoard extends Component {
     constructor(props) {
         super(props);
-
         this.state = {response_data: {}}
-
         this.initialized = false
     }
-
-
-    //     componentWillMount() {
-    //         this.getLeaderBoard()
-    //
-    //     }
 
 
     componentWillReceiveProps(nextProps) {
