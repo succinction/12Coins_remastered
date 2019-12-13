@@ -529,7 +529,7 @@ class App extends Component {
                     this._child_timer = child;
                 }}/>}
                 {TRUE && <Instructions />}
-                {TRUE && <Message msg={this.state.msg} className="messenger" id="messenger"/>}
+                {TRUE && <Message msg={this.state.msg} num={this.state.numberOfCoins} className="messenger" id="messenger"/>}
                 <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
                      coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
                      coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
