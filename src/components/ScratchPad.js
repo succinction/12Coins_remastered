@@ -192,7 +192,7 @@ class ScratchPad extends Component {
                 <br />
                 <div className="bottom">
                     <span className="copyright">Copyright 2006-2017   Joseph Howard   | <a
-                        href="mailto:succinction@gmail.com">succinction@gmail.com</a>   | 2.5.2-2017July |    built in react with gsap</span>
+                        href="mailto:succinction@gmail.com">succinction@gmail.com</a>   | 2.6 |    built in react with gsap</span>
                 </div>
             </div>
         );
