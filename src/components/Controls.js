@@ -16,28 +16,6 @@ class Controls extends Component {
 
 
     }
-// componentDidMount() {
-//
-// }
-// componentDidUpdate(prevProps, prevState) {
-//
-// }
-// componentWillMount() {
-//
-// }
-// componentWillUpdate(nextProps, nextState) {
-//
-// }
-// componentWillReceiveProps(nextProps) {
-//
-// }
-// componentWillUnmount() {
-//
-// }
-// shouldComponentUpdate(nextProps, nextState) {
-//     return ;
-// }
-//Controls
 
 
 
