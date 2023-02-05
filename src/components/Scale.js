@@ -13,7 +13,7 @@ class Scale extends Component {
         TweenLite.to("#scale", 2, {rotation: -bal, ease: Elastic.easeOut, transformOrigin: "232px 230px"});
         TweenLite.to("#scale_left_plate", 2, {rotation: bal, ease: Elastic.easeOut});
         TweenLite.to("#scale_right_plate", 2, {rotation: bal, ease: Elastic.easeOut});
-        TweenLite.to("#spinner", 2.5, {rotation: bal * -4, ease: Elastic.easeOut});
+        TweenLite.to("#spinner", 2, {rotation: bal * -4, ease: Elastic.easeOut});
     };
 
     componentDidUpdate(prevProps, prevState) {

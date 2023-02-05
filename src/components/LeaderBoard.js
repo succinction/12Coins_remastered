@@ -4,23 +4,9 @@ import React, {Component} from 'react';
 class LeaderBoard extends Component {
     constructor(props) {
         super(props);
-
         this.state = {response_data: {}}
-
         this.initialized = false
     }
-
-    // componentDidMount() {
-    //
-    // }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //
-    // }
-    //     componentWillMount() {
-    //         this.getLeaderBoard()
-    //
-    //     }
 
 
     componentWillReceiveProps(nextProps) {
@@ -62,23 +48,6 @@ class LeaderBoard extends Component {
 
 
     }
-
-    // componentWillUpdate(nextProps, nextState) {
-    //
-    //
-    //
-    //
-    //
-    // }
-
-    // componentWillReceiveProps(nextProps) {
-    //
-    // }
-    // componentWillUnmount() {
-    //
-    // }
-
-
 
     render() {
         return (

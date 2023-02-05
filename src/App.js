@@ -513,43 +513,29 @@ class App extends Component {
     };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return true;
-    // }
-
-
     render() {
         let TRUE = true;
         return (
             <div className="App" id="app_id">
-
                 {TRUE && <Bg />}
-
                 {TRUE && <Scale balanced={this.state.balanced}/>}
-
                 {TRUE && <Timer ref={(child) => {
                     this._child_timer = child;
                 }}/>}
-
                 {TRUE && <Instructions />}
-
-                {TRUE && <Message msg={this.state.msg} className="messenger" id="messenger"/>}
-
+                {TRUE && <Message msg={this.state.msg} num={this.state.numberOfCoins} className="messenger" id="messenger"/>}
                 <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
                      coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
                      coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
                      replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
                      label_fn={this.toggle_labels}/>
-
                 <Coins ref={(child) => {
                     this._child = child;
                 }} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game}/>
-
                 <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
                           backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
                           load_fn={this.enterReplay}/>
-
                 {TRUE && <ScratchPad user_name={this.state.userName} last_game={this.state.lastSavedGame}/> }
             </div>
         );

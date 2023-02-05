@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Message extends Component {
-    render() {
-        return (
+export default function Message(props) {
+    return (
         <p className="messenger" id="messenger">
-        <span className="title" >Coins & Scale</span>   >>>    {this.props.msg}
+            <span className="title" >{props.num} Coins & Scale</span>   :    {props.msg}
         </p>
-        );
-    }
+    );
 }
-
-export default Message;
