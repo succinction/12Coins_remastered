@@ -1,6 +1,3 @@
-/**
- * Created by JoeHow on 5/25/17.
- */
 import React, {Component} from 'react';
 import Coin from './Coin'
 import Ankh from './Ankh'
@@ -83,12 +80,6 @@ class Coins extends Component {
         this.draggabate()
     }
 
-    // componentWillMount() {
-    // }
-    // componentWillReceiveProps(nextProps) {
-    // }
-    // componentWillUnmount() {
-    // }
 
     componentWillUpdate(nextProps, nextState) {
         //immediately before rendering when new props or state are being received
@@ -100,7 +91,6 @@ class Coins extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log("this.props.label , nextProps.label" , this.props.label ,  nextProps.label)
 
         if (this.props.numberOfCoins !== nextProps.numberOfCoins) {
             return true;
@@ -112,9 +102,6 @@ class Coins extends Component {
                 labels_on: nextProps.label
             });
 
-            // this.state.labels_on = nextProps.label
-            // console.log("this.props.label !== nextProps.label ::COINS :: ", this.props.label !== nextProps.label, nextProps.label)
-            // this.state.labels_on = nextProps.label;
 
             return true
         }
