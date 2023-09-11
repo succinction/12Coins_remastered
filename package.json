@@ -1,8 +1,8 @@
 {
   "name": "coin_transform",
   "version": "0.1.1",
-  "xprivate": true,
-  "xhomepage": ".",
+  "private": true,
+  "homepage": "./build",
   "devDependencies": {
     "react-scripts": "^3.3.0"
   },
