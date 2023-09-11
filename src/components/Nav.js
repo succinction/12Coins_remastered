@@ -33,7 +33,7 @@ class Nav extends Component {
 
     render() {
         const number_buttons = true;
-        const to_15 = (false) ? number_buttons : false;
+        const to_15 = (true) ? number_buttons : false;
         const TRUE = true;
 
         return (

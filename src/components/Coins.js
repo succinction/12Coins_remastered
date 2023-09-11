@@ -22,6 +22,9 @@ class Coins extends Component {
                 "coin_images/Arethusa480bcSyracusan.png",
                 "coin_images/Arethusa490-485bcSyracusan.png",
                 "coin_images/Arethusa510-490bcSyracusan.png",
+                "coin_images/Arethusa480bcSyracusan.png",
+                "coin_images/Arethusa490-485bcSyracusan.png",
+                "coin_images/Arethusa510-490bcSyracusan.png",
                 "coin_images/HieroCopper.png"
             ]
         }

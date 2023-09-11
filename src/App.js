@@ -10,8 +10,8 @@ import Scale from './components/Scale'
 import Timer from './components/Timer';
 import { TweenMax, Power3 } from 'gsap';
 import axios from 'axios';
-import Controls from "./components/Controls";
 import { v4 as uuidv4 } from 'uuid';
+import Controls from "./components/Controls";
 
 class App extends Component {
     constructor(props) {
