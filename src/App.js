@@ -1,22 +1,22 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Coins from './components/Coins'
-import Nav   from './components/Nav'
-import Bg    from './components/Bg'
-import Instructions    from './components/Instructions'
+import Nav from './components/Nav'
+import Bg from './components/Bg'
+import Instructions from './components/Instructions'
 import Message from './components/Message'
-import ScratchPad   from './components/ScratchPad';
+import ScratchPad from './components/ScratchPad';
 import Scale from './components/Scale'
-import Timer   from './components/Timer';
-import { TweenMax, Power3 }  from 'gsap';
+import Timer from './components/Timer';
+import { TweenMax, Power3 } from 'gsap';
 import axios from 'axios';
 import Controls from "./components/Controls";
-const querystring = require('query-string');
+import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.gameNumber = 1;
+        this.gameNumber = uuidv4();
         const initialNumberOfCoins = 9;
         this.numberOfCoins = initialNumberOfCoins;
         this.lucky_number = Math.floor(Math.random() * initialNumberOfCoins);
@@ -26,17 +26,14 @@ class App extends Component {
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
 
         this.login_fn = (response_name) => {
-
             let name = localStorage.getItem("name");
-
-            if (name === null || name === "null") {
-                name = 'guest';
+            if (name === null || name === "null" || name === "undefined" || name === undefined) {
+                name = 'guest' + Math.round(Math.random()*100000);
                 this.userName = name;
-                // localStorage.setItem("name", name);
+                localStorage.setItem("name", name);
             }
-
             if (response_name !== null) {
-                if (response_name !== name ){
+                if (response_name !== name) {
                     name = response_name;
                     this.userName = name;
                     this.setState({
@@ -49,9 +46,6 @@ class App extends Component {
         };
 
         this.userName = this.login_fn(null);
-
-        // localStorage.setItem("name", name);
-        // this.userName = "Guest_63";
         this.lastSavedGame = 0;
 
         this.state = {
@@ -65,18 +59,13 @@ class App extends Component {
             numberOfCoins: this.numberOfCoins,
             balanced: 0
         };
-
         document.onselectstart = function () {
             return false;
         };
         document.body.setAttribute('unselectable', 'on', 0);
-
         this.cheated = false;
-
         this.gameSaved = 0;
-
         this.rePlayMode = false;
-
         this.renew_game_object = () => {
             let sign = (this.light_or_heavy > 1) ? "+" : "-";
             return {
@@ -99,93 +88,69 @@ class App extends Component {
         };
         this.coin_location_array = this.reset_location_array();
         this.coin_locations = this.coin_location_array.toString();
-        // COLOR WARP
-        this.colr = {h: 0, s: 50, l: 100};
+        this.colr = { h: 0, s: 50, l: 100 };
         this.element = document.getElementsByTagName("body")[0];
-        // /COLOR WARP
-//////////////////////////////////////////////////////////////////////////////////////
         this.gameObject = this.renew_game_object();
-//////////////////////////////////////////////////////////////////////////////////////
     }
 
-    // COLOR WARP
     applyColor = () => {
         this.element.style.backgroundColor = "hsl(" + this.colr.h + "," + this.colr.s + "%," + this.colr.l + "%)";
     };
     end_color = () => {
-        TweenMax.to(this.colr, 6, {h: 0, l: 100, onUpdate: this.applyColor});
+        TweenMax.to(this.colr, 6, { h: 0, l: 100, onUpdate: this.applyColor });
     };
-    // /COLOR WARP
-
-
-//////////////////////////////////////////////////////////////////////////////////////
     updateGameObject = () => {
-
         let measuretime = this._child_timer.get_time();
         let ankh_xy = [parseInt(document.getElementById("ankh")._gsTransform.x, 10), parseInt(document.getElementById("ankh")._gsTransform.y, 10)];
         let feather_xy = [parseInt(document.getElementById("feather")._gsTransform.x, 10), parseInt(document.getElementById("feather")._gsTransform.y, 10)];
-
-        let push_position = {'time': measuretime, 'ankh': ankh_xy, 'feather': feather_xy};
+        let push_position = { 'time': measuretime, 'ankh': ankh_xy, 'feather': feather_xy };
         for (let i = this.state.numberOfCoins - 1; i >= 0; i--) {
             const this_coin = document.getElementById('coin' + i);
             const coin_xy = [parseInt(this_coin._gsTransform.x, 10), parseInt(this_coin._gsTransform.y, 10)];
             push_position['coin' + i] = coin_xy;
         }
-
         this.gameObject.numberOfMeasurements = this.measurementsUsed;
         this.gameObject.finalTime = measuretime;
         this.gameObject.gameType = this.state.numberOfCoins;
         this.gameObject.measurements.push(push_position);
     };
 
-
-//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////
     // REPLAY OBJECT:
     // PLAYER NAME
     // GAME NUMBER
     // DATE
     // MEASUREMENTS
-
-
     // REPLAY MODE
 
     enterReplay = (gameID) => {
-
-        // console.log('enterReplay: ', gameID);
-
-        // INTRO REPLAY CONTROLS
-
-        // let replay = () => {
-        //     this.rePlayMode = true;
+        // // console.log('enterReplay: ', gameID);
+        // // INTRO REPLAY CONTROLS
+        // // let replay = () => {
+        // //     this.rePlayMode = true;
+        // // };
+        // let saveState = (data_user, data_id, response_data) => {
+        //     this.setState({
+        //         userName: data_user,
+        //         lastSavedGame: data_id,
+        //         rePlayMode: true,
+        //         replayObject: response_data
+        //     });
         // };
+        // // LOAD GAME THROUGH AJAX
+        // axios({
+        //     method: 'get',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        //     url: 'http://127.0.0.1:8000/api/game/' + gameID
+        //     // data: dat
 
-
-        let saveState = (data_user, data_id, response_data) => {
-            this.setState({
-                userName: data_user,
-                lastSavedGame: data_id,
-                rePlayMode: true,
-                replayObject: response_data
-            });
-        };
-
-        // LOAD GAME THROUGH AJAX
-
-        axios({
-            method: 'get',
-            headers: {'Content-Type': 'application/json'},
-            // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            url: 'http://127.0.0.1:8000/api/game/' + gameID
-            // data: dat
-
-        }).then(function (response) {
-            let responsedata = JSON.parse(response.data.measurements);
-            saveState(response.data.user, response.data.id, responsedata)
-        });
-
-
+        // }).then(function (response) {
+        //     console.log("response", response)
+        //     let responsedata = JSON.parse(response.data);
+        //     console.log("responsedata", responsedata)
+        //     saveState(response.data.user, response.data.id, responsedata)
+        // });
     };
 
 
@@ -203,14 +168,10 @@ class App extends Component {
 
     //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
-
-
     saveGameObject = (used, time, score, dur) => {
-
         if (this.gameSaved === this.gameObject.gameNumber) {
             return;
         }
-
         let change_name = (arg) => {
             // console.log(arg);
             if (this.userName !== arg) {
@@ -219,37 +180,30 @@ class App extends Component {
                 this.gameObject.userName = arg;
             }
         };
-
         let SavedGame = (gameID, argname) => {
-
             if (this.state.userName !== argname) {
                 this.setState({
                     userName: argname,
                     lastSavedGame: gameID
                 });
-
                 this.login_fn(argname)
-
-
             } else {
                 this.setState({
                     lastSavedGame: gameID
                 });
             }
-
         };
-
         let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
-
-        let dat = querystring.stringify(
+        let _username = this.userName;
+        let dat = (
             {
-                userName: this.gameObject.userName,
+                user: _username,
                 won: thescore,
                 duration: dur,
                 cheat: cheated,
-                gameNumber: this.gameObject.gameNumber,
+                gameNumber: String(this.gameObject.gameNumber),
                 gameType: this.gameObject.gameType,
                 numberOfMeasurements: used,
                 finalTime: scoretime,
@@ -258,27 +212,22 @@ class App extends Component {
             }
         );
 
-        axios({
-            method: 'post',
-            // headers: {'Content-Type': 'application/json'},
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            url: 'http://127.0.0.1:8000/api/savegame/',
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        axios.post('https://hp5yhcm10f.execute-api.us-west-2.amazonaws.com/neo/coins_savegame', {
             data: dat
-
-        }).then(function (response) {
+        }, { headers }
+        ).then(function (response) {
             change_name(response.data.newGuest);
             SavedGame(response.data.gameID, response.data.newGuest)
         });
-
         this.gameSaved = this.gameObject.gameNumber
-
-
     };
 
-//////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
-        // console.log("number passed : ", numbr)
-        if (typeof(numbr) !== "number") {
+        if (typeof (numbr) !== "number") {
             numbr = this.state.numberOfCoins
         }
 
@@ -289,7 +238,7 @@ class App extends Component {
         let lucky_number_init = -1;
         this.cheated = false;
         this._child_timer.reset_time();
-        if (typeof(numbr) === "number") {
+        if (typeof (numbr) === "number") {
             lucky_number_init = Math.floor(Math.random() * numbr);
         } else {
             lucky_number_init = Math.floor(Math.random() * this.state.numberOfCoins);
@@ -298,11 +247,11 @@ class App extends Component {
         this.readout = "Find the false coin within three measurements on the scale.";
         this.lucky_number = lucky_number_init;
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
-        this.gameNumber++;
+        this.gameNumber = uuidv4();
         let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
-        TweenMax.to(icons, .5, {autoAlpha: 1, ease: Power3.easeOut});
-        TweenMax.to(["#cheat_btn"], 2, {color: "hsl(0, 0%, 100%)"});
-        TweenMax.to(["#messenger"], 2, {color: "hsl(0, 0%, 0%)"});
+        TweenMax.to(icons, .5, { autoAlpha: 1, ease: Power3.easeOut });
+        TweenMax.to(["#cheat_btn"], 2, { color: "hsl(0, 0%, 100%)" });
+        TweenMax.to(["#messenger"], 2, { color: "hsl(0, 0%, 0%)" });
 
         this.setState({
             numberOfCoins: numbr,
@@ -332,13 +281,12 @@ class App extends Component {
             balanced: 0
         });
     }
-    /////////////////////////////////////////////////////////////////////////
     balance_scale = (tc) => {
         let balance_mod = 0;
         if (tc.clientY < 428) {
             let offset = window.innerWidth / 2;
             balance_mod = (tc.clientX < offset) ? 1 : -1;
-        } else if (tc.changedTouches && tc.changedTouches[0].clientY < ( (window.screen.height > 428) ? 428 : window.screen.height - 100)) {
+        } else if (tc.changedTouches && tc.changedTouches[0].clientY < ((window.screen.height > 428) ? 428 : window.screen.height - 100)) {
             let offset = window.screen.width / 2;
             balance_mod = (tc.changedTouches[0].clientX < offset) ? 1 : -1;
         } else {
@@ -354,7 +302,6 @@ class App extends Component {
             measurement_constituted += this.coin_location_array[i];
         }
         if (measurement_constituted === 0) {
-            /////
             // show lucky
             for (let i = 0; i < this.coin_location_array.length; i++) {
                 if (i === this.lucky_number) {
@@ -454,39 +401,20 @@ class App extends Component {
             } else {
                 this.measurementsUsed++;
                 this.readout = this.measurementsUsed + ' of 3 measurements used.';
-                TweenMax.to("#scale_icon" + (this.measurementsUsed - 1), .5, {autoAlpha: 0.2, ease: Power3.easeOut});
+                TweenMax.to("#scale_icon" + (this.measurementsUsed - 1), .5, { autoAlpha: 0.2, ease: Power3.easeOut });
             }
         }
         this.coin_locations = coin_locations_now;
-
-
-        ////////
         this.setState({
             msg: this.readout
         })
-        ///////
     };
-/////////////////////////// BUTTONS //////////////////////////////////////////
     show_cheat = () => {
-        //console.log("Cheating")
-        let lucky_label = ("#coin" + this.lucky_number );
-        TweenMax.to(lucky_label, .4, {y: "-=30"});
-        TweenMax.to(["#messenger", "#cheat_btn"], 2, {color: "hsl(0, 80%, 60%)"});
-
+        let lucky_label = ("#coin" + this.lucky_number);
+        TweenMax.to(lucky_label, .4, { y: "-=30" });
+        TweenMax.to(["#messenger", "#cheat_btn"], 2, { color: "hsl(0, 80%, 60%)" });
         this.cheated = true;
-
     };
-
-
-    //////////////////////////////////////////////
-    // coins_ = (num) => {
-    //     this.setState({
-    //         numberOfCoins: num
-    //     });
-    //     this.reset_game(num)
-    // };
-    //////////////////////////////////////////////
-    // THESE ARE VERBOSE EXPLICITLY REFERENCED CALLBACKS FOR GOOD REASON
     coins_3 = () => {
         this.reset_game(3)
     };
@@ -505,38 +433,40 @@ class App extends Component {
     coins_12 = () => {
         this.reset_game(12)
     };
+    coins_13 = () => {
+        this.reset_game(13)
+    };
+    coins_14 = () => {
+        this.reset_game(14)
+    };
+    coins_15 = () => {
+        this.reset_game(15)
+    };
     toggle_labels = () => {
         this.setState({
             labels: !this.state.labels
         });
-        // console.log('labels: !this.state.labels : ', this.state.labels)
     };
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     render() {
-        let TRUE = true;
         return (
             <div className="App" id="app_id">
-                {TRUE && <Bg />}
-                {TRUE && <Scale balanced={this.state.balanced}/>}
-                {TRUE && <Timer ref={(child) => {
-                    this._child_timer = child;
-                }}/>}
-                {TRUE && <Instructions />}
-                {TRUE && <Message msg={this.state.msg} num={this.state.numberOfCoins} className="messenger" id="messenger"/>}
+                <Bg />
+                <Scale balanced={this.state.balanced} />
+                <Timer ref={(child) => this._child_timer = child} />
+                <Instructions />
+                <Message msg={this.state.msg} className="messenger" id="messenger" />
                 <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
-                     coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
-                     coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
-                     replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
-                     label_fn={this.toggle_labels}/>
-                <Coins ref={(child) => {
-                    this._child = child;
-                }} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
-                       label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game}/>
+                    coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
+                    coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
+                    replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
+                    label_fn={this.toggle_labels} />
+                <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
+                    label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
                 <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
-                          backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
-                          load_fn={this.enterReplay}/>
-                {TRUE && <ScratchPad user_name={this.state.userName} last_game={this.state.lastSavedGame}/> }
+                    backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
+                    load_fn={this.enterReplay} />
+                <ScratchPad user_name={this.state.userName} last_game={this.state.lastSavedGame} />
             </div>
         );
     }
